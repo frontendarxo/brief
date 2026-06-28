@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Бриф для white-label калькулятора рассрочки</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero__badge">Проектный бриф</div>
+        <h1 id="page-title">White-label калькулятор рассрочки</h1>
+        <p>
+          Ответьте на вопросы, чтобы мы быстро поняли задачу, сохранили нужные настройки
+          и подготовили калькулятор под ваш бренд.
+        </p>
+      </section>
+
+      <form class="brief-form" id="brief-form">
+        <section class="form-section" aria-labelledby="company-title">
+          <div class="section-heading">
+            <span>01</span>
+            <div>
+              <h2 id="company-title">Компания и бренд</h2>
+              <p>Заполните данные, которые должны заменить пример клиента MURABUY.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Название компании
+              <input name="companyName" type="text" placeholder="Например, MURABUY" />
+            </label>
+            <label>
+              Короткий слоган
+              <input name="tagline" type="text" placeholder="Короткая фраза под логотипом" />
+            </label>
+            <label>
+              Логотип
+              <select name="logoSource">
+                <option value="">Выберите вариант</option>
+                <option>Прикрепим файл отдельно</option>
+                <option>Возьмите с нашего сайта</option>
+                <option>Используйте текстовое название</option>
+                <option>Подготовим позже</option>
+                <option>Оставить по умолчанию</option>
+              </select>
+            </label>
+            <label>
+              Favicon
+              <select name="faviconSource">
+                <option value="">Выберите вариант</option>
+                <option>Сделать из логотипа</option>
+                <option>Прикрепим файл отдельно</option>
+                <option>Не нужен</option>
+                <option>Подготовим позже</option>
+                <option>Оставить по умолчанию</option>
+              </select>
+            </label>
+            <label class="form-grid__wide">
+              Комментарий по логотипу и favicon
+              <textarea name="brandAssetsComment" rows="3" placeholder="Например: логотип отправим в Telegram, favicon сделайте из логотипа"></textarea>
+            </label>
+            <label class="form-grid__wide">
+              Как подписывать бренд в PDF
+              <input name="pdfBrandName" type="text" placeholder="Название для PDF-документа" />
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="reference-title">
+          <div class="section-heading">
+            <span>02</span>
+            <div>
+              <h2 id="reference-title">Референс сайта</h2>
+              <p>Поделитесь примерами, которые помогут точнее попасть в ожидания.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label class="form-grid__wide">
+              Ссылка на сайт
+              <input name="referenceUrl" type="url" placeholder="https://..." />
+            </label>
+            <label class="form-grid__wide">
+              Что именно понравилось
+              <textarea name="referenceLikes" rows="3" placeholder="Дизайн, структура, блоки, подача"></textarea>
+            </label>
+            <label class="form-grid__wide">
+              Что точно не нужно повторять
+              <textarea name="referenceDislikes" rows="3" placeholder="Напишите ограничения или нежелательные элементы"></textarea>
+            </label>
+            <label class="form-grid__wide">
+              Какие элементы хотите адаптировать под свой бренд
+              <textarea name="referenceAdapt" rows="3" placeholder="Например, карточки, кнопки, блок о рассрочке"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="style-title">
+          <div class="section-heading">
+            <span>03</span>
+            <div>
+              <h2 id="style-title">Цвета и визуальный стиль</h2>
+              <p>Если текущий светлый UI подходит, можно написать «оставить по умолчанию».</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Основной акцентный цвет
+              <input name="primaryColor" type="text" placeholder="#C9A24A — золотой" />
+            </label>
+            <label>
+              Светлый акцентный цвет
+              <input name="lightAccentColor" type="text" placeholder="#F5E8C8 — светло-золотой" />
+            </label>
+            <label>
+              Цвет фона
+              <input name="backgroundColor" type="text" placeholder="#F8F6F0 — тёплый светлый" />
+            </label>
+            <label>
+              Цвет текста
+              <input name="textColor" type="text" placeholder="#1F2933 — тёмно-серый" />
+            </label>
+            <label class="form-grid__wide">
+              Цвет карточек и полей
+              <input name="cardColor" type="text" placeholder="#FFFFFF — белый" />
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="content-title">
+          <div class="section-heading">
+            <span>04</span>
+            <div>
+              <h2 id="content-title">Тексты на сайте</h2>
+              <p>Укажите свои формулировки или оставьте текущие тексты про исламскую рассрочку.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label class="form-grid__wide">
+              Текст под логотипом
+              <textarea name="logoText" rows="3" placeholder="Короткое описание сервиса"></textarea>
+            </label>
+            <label>
+              Заголовок блока «О рассрочке»
+              <input name="installmentTitle" type="text" placeholder="Например, О рассрочке" />
+            </label>
+            <label>
+              Текст в подвале сайта
+              <input name="footerText" type="text" placeholder="Короткая подпись внизу страницы" />
+            </label>
+            <label class="form-grid__wide">
+              Пункты в блоке «О рассрочке»
+              <textarea name="installmentPoints" rows="4" placeholder="Каждый пункт с новой строки"></textarea>
+            </label>
+            <label class="form-grid__wide">
+              Дисклеймер под результатом расчёта
+              <textarea name="resultDisclaimer" rows="3" placeholder="Юридическая или поясняющая информация"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="rules-title">
+          <div class="section-heading">
+            <span>05</span>
+            <div>
+              <h2 id="rules-title">Правила рассрочки</h2>
+              <p>Опишите ограничения по срокам, суммам и возможности менять наценку.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Минимальный срок
+              <input name="minTerm" type="text" placeholder="Например, 1 месяц" />
+            </label>
+            <label>
+              Максимальный срок
+              <input name="maxTerm" type="text" placeholder="Например, 24 месяца" />
+            </label>
+            <label>
+              Минимальная сумма товара
+              <input name="minAmount" type="text" placeholder="Например, 10 000 ₽" />
+            </label>
+            <label>
+              Максимальная сумма товара
+              <input name="maxAmount" type="text" placeholder="Например, 1 000 000 ₽" />
+            </label>
+            <label>
+              Максимальный первоначальный взнос
+              <input name="maxInitialPayment" type="text" placeholder="Например, до стоимости товара" />
+            </label>
+            <label>
+              Можно ли менять наценку вручную
+              <select name="manualMarkup">
+                <option value="">Выберите вариант</option>
+                <option>Да</option>
+                <option>Нет</option>
+                <option>Оставить по умолчанию</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="markup-title">
+          <div class="section-heading">
+            <span>06</span>
+            <div>
+              <h2 id="markup-title">Наценки по срокам</h2>
+              <p>Можно указать только сроки, которые отличаются от значений по умолчанию.</p>
+            </div>
+          </div>
+
+          <label>
+            Таблица наценок
+            <textarea
+              name="markupTable"
+              rows="8"
+              placeholder="1 месяц:&#10;2 месяца:&#10;3 месяца:&#10;...&#10;24 месяца:"
+            ></textarea>
+          </label>
+        </section>
+
+        <section class="form-section" aria-labelledby="defaults-title">
+          <div class="section-heading">
+            <span>07</span>
+            <div>
+              <h2 id="defaults-title">Значения по умолчанию и примеры</h2>
+              <p>Настройте стартовые значения калькулятора и быстрые примеры расчётов.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Стоимость по умолчанию
+              <input name="defaultAmount" type="text" placeholder="100 000 ₽" />
+            </label>
+            <label>
+              Первоначальный взнос по умолчанию
+              <input name="defaultInitialPayment" type="text" placeholder="25 000 ₽" />
+            </label>
+            <label>
+              Срок по умолчанию
+              <input name="defaultTerm" type="text" placeholder="6 месяцев" />
+            </label>
+            <label class="form-grid__wide">
+              Примеры расчётов для быстрых кнопок
+              <textarea name="quickExamples" rows="4" placeholder="Например: 50 000 ₽ / 6 месяцев / 10 000 ₽ взнос"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="features-title">
+          <div class="section-heading">
+            <span>08</span>
+            <div>
+              <h2 id="features-title">Функциональность</h2>
+              <p>Отметьте функции, которые нужно отключить, или оставьте всё по умолчанию.</p>
+            </div>
+          </div>
+
+          <div class="checkbox-grid">
+            <label><input name="disabledFeatures" type="checkbox" value="График платежей" /> Отключить график платежей</label>
+            <label><input name="disabledFeatures" type="checkbox" value="WhatsApp" /> Отключить WhatsApp</label>
+            <label><input name="disabledFeatures" type="checkbox" value="PDF" /> Отключить PDF</label>
+            <label><input name="disabledFeatures" type="checkbox" value="История" /> Отключить историю</label>
+            <label><input name="disabledFeatures" type="checkbox" value="Примеры" /> Отключить примеры</label>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="whatsapp-title">
+          <div class="section-heading">
+            <span>09</span>
+            <div>
+              <h2 id="whatsapp-title">WhatsApp заявка</h2>
+              <p>Опишите сценарий отправки расчёта менеджеру.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Номер WhatsApp
+              <input name="whatsappPhone" type="tel" placeholder="+7 999 000-00-00" />
+            </label>
+            <label>
+              Первое сообщение
+              <input name="whatsappMessage" type="text" placeholder="Здравствуйте, хочу оформить рассрочку" />
+            </label>
+            <label class="form-grid__wide">
+              Какие поля добавить
+              <textarea name="whatsappAddFields" rows="3" placeholder="Например, город, ИИН, комментарий"></textarea>
+            </label>
+            <label class="form-grid__wide">
+              Какие поля убрать
+              <textarea name="whatsappRemoveFields" rows="3" placeholder="Напишите, что не должно попадать в сообщение"></textarea>
+            </label>
+            <label class="form-grid__wide">
+              Нужно ли добавлять график платежей в сообщение
+              <select name="whatsappSchedule">
+                <option value="">Выберите вариант</option>
+                <option>Да</option>
+                <option>Нет</option>
+                <option>Оставить по умолчанию</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="documents-title">
+          <div class="section-heading">
+            <span>10</span>
+            <div>
+              <h2 id="documents-title">Документы для оформления</h2>
+              <p>Укажите документы и требования, которые клиент должен увидеть на сайте.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Документ 1
+              <input name="documentOne" type="text" placeholder="Паспорт покупателя" />
+            </label>
+            <label>
+              Документ 2
+              <input name="documentTwo" type="text" placeholder="Паспорт поручителя" />
+            </label>
+            <label>
+              Документ 3
+              <input name="documentThree" type="text" placeholder="Контактный номер телефона" />
+            </label>
+            <label class="form-grid__wide">
+              Дополнительные требования
+              <textarea name="documentRequirements" rows="3" placeholder="Возраст, гражданство, дополнительные справки"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="pdf-title">
+          <div class="section-heading">
+            <span>11</span>
+            <div>
+              <h2 id="pdf-title">PDF документ</h2>
+              <p>Настройте содержание, дисклеймер и название файла для печатной версии.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Заголовок PDF
+              <input name="pdfTitle" type="text" placeholder="Расчёт рассрочки" />
+            </label>
+            <label>
+              Подзаголовок PDF
+              <input name="pdfSubtitle" type="text" placeholder="Краткое пояснение документа" />
+            </label>
+            <label>
+              Нужно ли показывать график платежей
+              <select name="pdfSchedule">
+                <option value="">Выберите вариант</option>
+                <option>Да</option>
+                <option>Нет</option>
+                <option>Оставить по умолчанию</option>
+              </select>
+            </label>
+            <label>
+              Как назвать файл PDF
+              <input name="pdfFileName" type="text" placeholder="installment-calculation.pdf" />
+            </label>
+            <label class="form-grid__wide">
+              Текст дисклеймера
+              <textarea name="pdfDisclaimer" rows="3" placeholder="Текст в конце PDF"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="contacts-title">
+          <div class="section-heading">
+            <span>12</span>
+            <div>
+              <h2 id="contacts-title">Контакты и юридические тексты</h2>
+              <p>Добавьте контактные и юридические данные, если они нужны на сайте или в PDF.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Телефон
+              <input name="phone" type="tel" placeholder="+7 999 000-00-00" />
+            </label>
+            <label>
+              Email
+              <input name="email" type="email" placeholder="hello@example.com" />
+            </label>
+            <label>
+              Адрес
+              <input name="address" type="text" placeholder="Город, улица, офис" />
+            </label>
+            <label>
+              Сайт
+              <input name="website" type="url" placeholder="https://..." />
+            </label>
+            <label>
+              Юридическое название
+              <input name="legalName" type="text" placeholder="ООО / ИП / ТОО" />
+            </label>
+            <label class="form-grid__wide">
+              Дополнительный дисклеймер
+              <textarea name="legalDisclaimer" rows="3" placeholder="Юридические примечания или условия"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="summary-title">
+          <div class="section-heading">
+            <span>13</span>
+            <div>
+              <h2 id="summary-title">Итог и дополнительные пожелания</h2>
+              <p>Коротко напишите, что точно меняем, а что можно оставить по умолчанию.</p>
+            </div>
+          </div>
+
+          <label>
+            Итоговое описание
+            <textarea
+              name="summary"
+              rows="6"
+              placeholder="Например: оставить всё по умолчанию. Изменить только логотип, основной цвет, номер WhatsApp и таблицу наценок."
+            ></textarea>
+          </label>
+        </section>
+
+        <div class="form-actions">
+          <div>
+            <p>Можно заполнить только важные поля. Всё остальное мы оставим по умолчанию.</p>
+            <p class="form-status" id="form-status" role="status"></p>
+          </div>
+          <button type="submit" id="submit-button">Отправить бриф</button>
+        </div>
+      </form>
+
+      <section class="success-message" id="success-message" aria-live="polite" hidden>
+        <div>
+          <span>Готово</span>
+          <h2>Спасибо! Мы получили ваш бриф и скоро свяжемся с вами.</h2>
+          <p>Если нужно что-то дополнить, вы можете вернуться к форме и отправить обновлённую версию.</p>
+          <button type="button" id="edit-brief">Вернуться к форме</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
