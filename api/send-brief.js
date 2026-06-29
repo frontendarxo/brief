@@ -1,4 +1,6 @@
 const TELEGRAM_MESSAGE_LIMIT = 3900;
+const BRIEF_SEND_ERROR = "Не удалось отправить бриф. Попробуйте ещё раз.";
+const TELEGRAM_CONFIG_ERROR = "На сервере не настроена отправка в Telegram.";
 
 const fieldHasContent = (field) => field?.label && field?.value;
 
@@ -30,14 +32,19 @@ const splitMessage = (text) => {
 };
 
 const sendTelegramMessage = async ({ botToken, chatId, text }) => {
-  const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: chatId, text }),
-  });
+  try {
+    const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text }),
+    });
 
-  if (!response.ok) {
-    throw new Error("Telegram rejected the message");
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Telegram rejected the message: ${response.status} ${errorText}`);
+    }
+  } catch (error) {
+    throw new Error(error.message || "Telegram request failed");
   }
 };
 
@@ -52,7 +59,8 @@ module.exports = async (request, response) => {
     const fields = Array.isArray(request.body?.fields) ? request.body.fields : [];
 
     if (!botToken || !chatId) {
-      response.status(500).json({ error: "Telegram is not configured" });
+      console.error(TELEGRAM_CONFIG_ERROR);
+      response.status(500).json({ error: TELEGRAM_CONFIG_ERROR });
       return;
     }
 
@@ -61,6 +69,7 @@ module.exports = async (request, response) => {
     await Promise.all(messages.map((text) => sendTelegramMessage({ botToken, chatId, text })));
     response.status(200).json({ ok: true });
   } catch (error) {
-    response.status(500).json({ error: "Brief was not sent" });
+    console.error(error);
+    response.status(500).json({ error: BRIEF_SEND_ERROR });
   }
 };

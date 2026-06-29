@@ -99,6 +99,15 @@ const getFilledFields = () => {
 
 const getBriefFields = () => [...getFilledFields(), ...getCheckedGroups()];
 
+const getSendErrorMessage = async (response) => {
+  try {
+    const data = await response.json();
+    return data.error || "Не удалось отправить бриф. Попробуйте ещё раз.";
+  } catch (error) {
+    return "Не удалось отправить бриф. Попробуйте ещё раз.";
+  }
+};
+
 const setSubmitState = (isLoading) => {
   submitButton.disabled = isLoading;
   submitButton.textContent = isLoading ? "Отправляем..." : "Отправить бриф";
@@ -112,7 +121,7 @@ const sendBrief = async () => {
   });
 
   if (!response.ok) {
-    throw new Error("Не удалось отправить бриф. Попробуйте ещё раз.");
+    throw new Error(await getSendErrorMessage(response));
   }
 };
 
