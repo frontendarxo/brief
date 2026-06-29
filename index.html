@@ -515,10 +515,17 @@
         </div>
       </form>
 
-      <section class="success-message" id="success-message" aria-live="polite" hidden>
-        <div>
+      <section
+        class="success-message"
+        id="success-message"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="success-title"
+        hidden
+      >
+        <div class="success-message__card">
           <span>Готово</span>
-          <h2>Спасибо! Мы получили ваш бриф и скоро свяжемся с вами.</h2>
+          <h2 id="success-title">Спасибо! Мы получили ваш бриф и скоро свяжемся с вами.</h2>
           <p>Если нужно что-то дополнить, вы можете вернуться к форме и отправить обновлённую версию.</p>
           <button type="button" id="edit-brief">Вернуться к форме</button>
         </div>

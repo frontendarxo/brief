@@ -5,14 +5,24 @@ const submitButton = document.querySelector("#submit-button");
 const formStatus = document.querySelector("#form-status");
 const briefNav = document.querySelector(".brief-nav");
 const heroSection = document.querySelector(".hero");
+const successCard = successMessage.querySelector(".success-message__card");
 const navLinks = [...document.querySelectorAll(".brief-nav__link")];
 const formSections = [...document.querySelectorAll(".form-section[id]")];
 const canHover = window.matchMedia("(hover: hover)").matches;
+const NAV_VISIBILITY_OFFSET = 80;
+const SECTION_FOCUS_OFFSET = 140;
+const ESCAPE_KEY = "Escape";
 
 const updateNavVisibility = () => {
   const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
 
-  briefNav.classList.toggle("is-visible", window.scrollY > heroBottom - 80);
+  briefNav.classList.toggle("is-visible", window.scrollY > heroBottom - NAV_VISIBILITY_OFFSET);
+};
+
+const scrollActiveLinkIntoView = () => {
+  const activeLink = briefNav.querySelector(".brief-nav__link.is-active");
+
+  activeLink?.scrollIntoView({ block: "nearest", inline: "center" });
 };
 
 const setActiveSection = (sectionId) => {
@@ -25,26 +35,31 @@ const setActiveSection = (sectionId) => {
 
     link.classList.toggle("is-active", isActive);
     link.classList.toggle("is-neighbor", isNeighbor);
+    link.toggleAttribute("aria-current", isActive);
   });
 
   formSections.forEach((section) => {
     section.classList.toggle("is-current", section.id === sectionId);
   });
+
+  if (briefNav.classList.contains("is-expanded")) {
+    scrollActiveLinkIntoView();
+  }
 };
 
-const observeSections = () => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const visibleEntry = entries.find((entry) => entry.isIntersecting);
+const getCurrentSectionId = () => {
+  const currentSection = formSections.reduce((closestSection, section) => {
+    const sectionDistance = Math.abs(section.getBoundingClientRect().top - SECTION_FOCUS_OFFSET);
+    const closestDistance = Math.abs(closestSection.getBoundingClientRect().top - SECTION_FOCUS_OFFSET);
 
-      if (visibleEntry) {
-        setActiveSection(visibleEntry.target.id);
-      }
-    },
-    { rootMargin: "-35% 0px -55% 0px", threshold: 0 },
-  );
+    return sectionDistance < closestDistance ? section : closestSection;
+  }, formSections[0]);
 
-  formSections.forEach((section) => observer.observe(section));
+  return currentSection.id;
+};
+
+const updateActiveSection = () => {
+  setActiveSection(getCurrentSectionId());
 };
 
 const handleNavClick = (event) => {
@@ -54,10 +69,15 @@ const handleNavClick = (event) => {
   if (clickedLink && !isExpanded && !canHover) {
     event.preventDefault();
     briefNav.classList.add("is-expanded");
+    scrollActiveLinkIntoView();
     return;
   }
 
   briefNav.classList.toggle("is-expanded", !clickedLink && !isExpanded);
+
+  if (!isExpanded) {
+    scrollActiveLinkIntoView();
+  }
 };
 
 const closeNavOnOutsideClick = (event) => {
@@ -126,15 +146,27 @@ const sendBrief = async () => {
 };
 
 const showSuccessMessage = () => {
-  briefForm.hidden = true;
   successMessage.hidden = false;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  document.body.classList.add("has-modal");
+  editBriefButton.focus();
 };
 
 const showBriefForm = () => {
   successMessage.hidden = true;
-  briefForm.hidden = false;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  document.body.classList.remove("has-modal");
+  submitButton.focus();
+};
+
+const handleSuccessMessageClick = (event) => {
+  if (!successCard.contains(event.target)) {
+    showBriefForm();
+  }
+};
+
+const handleEscapePress = (event) => {
+  if (event.key === ESCAPE_KEY && !successMessage.hidden) {
+    showBriefForm();
+  }
 };
 
 briefForm.addEventListener("submit", async (event) => {
@@ -153,9 +185,11 @@ briefForm.addEventListener("submit", async (event) => {
 });
 
 editBriefButton.addEventListener("click", showBriefForm);
+successMessage.addEventListener("click", handleSuccessMessageClick);
 briefNav.addEventListener("click", handleNavClick);
 document.addEventListener("click", closeNavOnOutsideClick);
+document.addEventListener("keydown", handleEscapePress);
 window.addEventListener("scroll", updateNavVisibility, { passive: true });
-setActiveSection(formSections[0].id);
+window.addEventListener("scroll", updateActiveSection, { passive: true });
+updateActiveSection();
 updateNavVisibility();
-observeSections();

@@ -39,6 +39,10 @@ body {
   line-height: 1.5;
 }
 
+body.has-modal {
+  overflow: hidden;
+}
+
 button,
 input,
 select,
@@ -211,7 +215,7 @@ button {
 
 .form-section,
 .form-actions,
-.success-message > div {
+.success-message__card {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.9);
@@ -474,18 +478,27 @@ textarea:focus {
 }
 
 .success-message {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
   display: grid;
-  min-height: 70vh;
   place-items: center;
+  padding: 20px;
+  background: rgba(29, 41, 57, 0.28);
+  backdrop-filter: blur(12px);
 }
 
 .success-message[hidden] {
   display: none;
 }
 
-.success-message > div {
+.success-message__card {
   width: min(100%, 680px);
   padding: clamp(28px, 5vw, 48px);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 28px 90px rgba(29, 41, 57, 0.22);
   text-align: center;
 }
 
@@ -517,6 +530,24 @@ textarea:focus {
     border-radius: var(--radius-md);
   }
 
+  .brief-nav.is-expanded {
+    flex-wrap: wrap;
+    max-height: min(52vh, 320px);
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 22px;
+    scrollbar-width: thin;
+  }
+
+  .brief-nav.is-expanded::-webkit-scrollbar {
+    display: block;
+    width: 6px;
+  }
+
+  .brief-nav.is-expanded .brief-nav__link {
+    max-width: none;
+  }
+
   .form-section {
     scroll-margin-top: 86px;
   }
@@ -544,7 +575,7 @@ textarea:focus {
   .hero,
   .form-section,
   .form-actions,
-  .success-message > div {
+  .success-message__card {
     border-radius: 22px;
   }
 
