@@ -3,12 +3,76 @@ const successMessage = document.querySelector("#success-message");
 const editBriefButton = document.querySelector("#edit-brief");
 const submitButton = document.querySelector("#submit-button");
 const formStatus = document.querySelector("#form-status");
+const briefNav = document.querySelector(".brief-nav");
+const heroSection = document.querySelector(".hero");
+const navLinks = [...document.querySelectorAll(".brief-nav__link")];
+const formSections = [...document.querySelectorAll(".form-section[id]")];
+const canHover = window.matchMedia("(hover: hover)").matches;
+
+const updateNavVisibility = () => {
+  const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+
+  briefNav.classList.toggle("is-visible", window.scrollY > heroBottom - 80);
+};
+
+const setActiveSection = (sectionId) => {
+  const activeIndex = navLinks.findIndex((link) => link.hash === `#${sectionId}`);
+
+  navLinks.forEach((link) => {
+    const linkIndex = navLinks.indexOf(link);
+    const isActive = linkIndex === activeIndex;
+    const isNeighbor = Math.abs(linkIndex - activeIndex) === 1;
+
+    link.classList.toggle("is-active", isActive);
+    link.classList.toggle("is-neighbor", isNeighbor);
+  });
+
+  formSections.forEach((section) => {
+    section.classList.toggle("is-current", section.id === sectionId);
+  });
+};
+
+const observeSections = () => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visibleEntry = entries.find((entry) => entry.isIntersecting);
+
+      if (visibleEntry) {
+        setActiveSection(visibleEntry.target.id);
+      }
+    },
+    { rootMargin: "-35% 0px -55% 0px", threshold: 0 },
+  );
+
+  formSections.forEach((section) => observer.observe(section));
+};
+
+const handleNavClick = (event) => {
+  const clickedLink = event.target.closest(".brief-nav__link");
+  const isExpanded = briefNav.classList.contains("is-expanded");
+
+  if (clickedLink && !isExpanded && !canHover) {
+    event.preventDefault();
+    briefNav.classList.add("is-expanded");
+    return;
+  }
+
+  briefNav.classList.toggle("is-expanded", !clickedLink && !isExpanded);
+};
+
+const closeNavOnOutsideClick = (event) => {
+  if (!briefNav.contains(event.target)) {
+    briefNav.classList.remove("is-expanded");
+  }
+};
 
 const getLabelText = (field) => {
   const label = field.closest("label");
-  const textNodes = [...label.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE);
+  const labelCopy = label.cloneNode(true);
+  const ignoredElements = labelCopy.querySelectorAll("input, select, textarea, .required-badge");
 
-  return textNodes.map((node) => node.textContent.trim()).filter(Boolean).join(" ");
+  ignoredElements.forEach((element) => element.remove());
+  return labelCopy.textContent.trim().replace(/\s+/g, " ");
 };
 
 const getCheckedGroups = () => {
@@ -80,3 +144,9 @@ briefForm.addEventListener("submit", async (event) => {
 });
 
 editBriefButton.addEventListener("click", showBriefForm);
+briefNav.addEventListener("click", handleNavClick);
+document.addEventListener("click", closeNavOnOutsideClick);
+window.addEventListener("scroll", updateNavVisibility, { passive: true });
+setActiveSection(formSections[0].id);
+updateNavVisibility();
+observeSections();

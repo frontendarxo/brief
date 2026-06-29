@@ -21,22 +21,53 @@
           Ответьте на вопросы, чтобы мы быстро поняли задачу, сохранили нужные настройки
           и подготовили калькулятор под ваш бренд.
         </p>
+        <p class="hero__hint">
+          Обязательны только 3 поля в первом разделе. Остальное можно пропустить или написать
+          «оставить по умолчанию».
+        </p>
       </section>
 
+      <nav class="brief-nav" aria-label="Навигация по брифу">
+        <a href="#company" class="brief-nav__link is-active">Компания</a>
+        <a href="#reference" class="brief-nav__link">Референс</a>
+        <a href="#style" class="brief-nav__link">Стиль</a>
+        <a href="#content" class="brief-nav__link">Тексты</a>
+        <a href="#rules" class="brief-nav__link">Правила</a>
+        <a href="#markup" class="brief-nav__link">Наценки</a>
+        <a href="#defaults" class="brief-nav__link">Примеры</a>
+        <a href="#features" class="brief-nav__link">Функции</a>
+        <a href="#whatsapp" class="brief-nav__link">WhatsApp</a>
+        <a href="#documents" class="brief-nav__link">Документы</a>
+        <a href="#pdf" class="brief-nav__link">PDF</a>
+        <a href="#contacts" class="brief-nav__link">Контакты</a>
+        <a href="#summary" class="brief-nav__link">Итог</a>
+      </nav>
+
       <form class="brief-form" id="brief-form">
-        <section class="form-section" aria-labelledby="company-title">
+        <section class="form-section" id="company" aria-labelledby="company-title">
           <div class="section-heading">
-            <span>01</span>
+            <span class="section-number">01</span>
             <div>
-              <h2 id="company-title">Компания и бренд</h2>
-              <p>Заполните данные, которые должны заменить пример клиента MURABUY.</p>
+              <div class="section-title">
+                <h2 id="company-title">Компания, бренд и контакт</h2>
+                <span class="section-meta section-meta--required">Обязательно</span>
+              </div>
+              <p>Напишите, кто вы и как с вами связаться.</p>
             </div>
           </div>
 
           <div class="form-grid">
             <label>
-              Название компании
-              <input name="companyName" type="text" placeholder="Например, MURABUY" />
+              <span class="field-label">Название компании <span class="required-badge">Обязательно</span></span>
+              <input name="companyName" type="text" placeholder="Например, MURABUY" required />
+            </label>
+            <label>
+              <span class="field-label">Контактное лицо <span class="required-badge">Обязательно</span></span>
+              <input name="contactName" type="text" placeholder="Ваше имя" required />
+            </label>
+            <label class="form-grid__wide">
+              <span class="field-label">Instagram, телефон, Telegram или email <span class="required-badge">Обязательно</span></span>
+              <input name="contactInfo" type="text" placeholder="@instagram, +7 999 000-00-00, Telegram или email" required />
             </label>
             <label>
               Короткий слоган
@@ -75,12 +106,15 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="reference-title">
+        <section class="form-section" id="reference" aria-labelledby="reference-title">
           <div class="section-heading">
-            <span>02</span>
+            <span class="section-number">02</span>
             <div>
-              <h2 id="reference-title">Референс сайта</h2>
-              <p>Поделитесь примерами, которые помогут точнее попасть в ожидания.</p>
+              <div class="section-title">
+                <h2 id="reference-title">Референс сайта</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Покажите сайты, которые вам нравятся.</p>
             </div>
           </div>
 
@@ -104,12 +138,15 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="style-title">
+        <section class="form-section" id="style" aria-labelledby="style-title">
           <div class="section-heading">
-            <span>03</span>
+            <span class="section-number">03</span>
             <div>
-              <h2 id="style-title">Цвета и визуальный стиль</h2>
-              <p>Если текущий светлый UI подходит, можно написать «оставить по умолчанию».</p>
+              <div class="section-title">
+                <h2 id="style-title">Цвета и визуальный стиль</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Укажите цвета бренда или оставьте как есть.</p>
             </div>
           </div>
 
@@ -137,12 +174,15 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="content-title">
+        <section class="form-section" id="content" aria-labelledby="content-title">
           <div class="section-heading">
-            <span>04</span>
+            <span class="section-number">04</span>
             <div>
-              <h2 id="content-title">Тексты на сайте</h2>
-              <p>Укажите свои формулировки или оставьте текущие тексты про исламскую рассрочку.</p>
+              <div class="section-title">
+                <h2 id="content-title">Тексты на сайте</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Напишите тексты, если хотите заменить стандартные.</p>
             </div>
           </div>
 
@@ -170,12 +210,15 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="rules-title">
+        <section class="form-section" id="rules" aria-labelledby="rules-title">
           <div class="section-heading">
-            <span>05</span>
+            <span class="section-number">05</span>
             <div>
-              <h2 id="rules-title">Правила рассрочки</h2>
-              <p>Опишите ограничения по срокам, суммам и возможности менять наценку.</p>
+              <div class="section-title">
+                <h2 id="rules-title">Правила рассрочки</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Укажите условия рассрочки, если они отличаются.</p>
             </div>
           </div>
 
@@ -212,12 +255,15 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="markup-title">
+        <section class="form-section" id="markup" aria-labelledby="markup-title">
           <div class="section-heading">
-            <span>06</span>
+            <span class="section-number">06</span>
             <div>
-              <h2 id="markup-title">Наценки по срокам</h2>
-              <p>Можно указать только сроки, которые отличаются от значений по умолчанию.</p>
+              <div class="section-title">
+                <h2 id="markup-title">Наценки по срокам</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Заполните только сроки, где нужна своя наценка.</p>
             </div>
           </div>
 
@@ -231,12 +277,15 @@
           </label>
         </section>
 
-        <section class="form-section" aria-labelledby="defaults-title">
+        <section class="form-section" id="defaults" aria-labelledby="defaults-title">
           <div class="section-heading">
-            <span>07</span>
+            <span class="section-number">07</span>
             <div>
-              <h2 id="defaults-title">Значения по умолчанию и примеры</h2>
-              <p>Настройте стартовые значения калькулятора и быстрые примеры расчётов.</p>
+              <div class="section-title">
+                <h2 id="defaults-title">Значения по умолчанию и примеры</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Укажите, с какими цифрами открывать калькулятор.</p>
             </div>
           </div>
 
@@ -260,12 +309,15 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="features-title">
+        <section class="form-section" id="features" aria-labelledby="features-title">
           <div class="section-heading">
-            <span>08</span>
+            <span class="section-number">08</span>
             <div>
-              <h2 id="features-title">Функциональность</h2>
-              <p>Отметьте функции, которые нужно отключить, или оставьте всё по умолчанию.</p>
+              <div class="section-title">
+                <h2 id="features-title">Функциональность</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Отметьте только то, что не нужно.</p>
             </div>
           </div>
 
@@ -278,12 +330,15 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="whatsapp-title">
+        <section class="form-section" id="whatsapp" aria-labelledby="whatsapp-title">
           <div class="section-heading">
-            <span>09</span>
+            <span class="section-number">09</span>
             <div>
-              <h2 id="whatsapp-title">WhatsApp заявка</h2>
-              <p>Опишите сценарий отправки расчёта менеджеру.</p>
+              <div class="section-title">
+                <h2 id="whatsapp-title">WhatsApp заявка</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Укажите, куда и что отправлять в WhatsApp.</p>
             </div>
           </div>
 
@@ -316,12 +371,15 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="documents-title">
+        <section class="form-section" id="documents" aria-labelledby="documents-title">
           <div class="section-heading">
-            <span>10</span>
+            <span class="section-number">10</span>
             <div>
-              <h2 id="documents-title">Документы для оформления</h2>
-              <p>Укажите документы и требования, которые клиент должен увидеть на сайте.</p>
+              <div class="section-title">
+                <h2 id="documents-title">Документы для оформления</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Напишите, какие документы нужны клиенту.</p>
             </div>
           </div>
 
@@ -345,12 +403,15 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="pdf-title">
+        <section class="form-section" id="pdf" aria-labelledby="pdf-title">
           <div class="section-heading">
-            <span>11</span>
+            <span class="section-number">11</span>
             <div>
-              <h2 id="pdf-title">PDF документ</h2>
-              <p>Настройте содержание, дисклеймер и название файла для печатной версии.</p>
+              <div class="section-title">
+                <h2 id="pdf-title">PDF документ</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Укажите, что должно быть в PDF.</p>
             </div>
           </div>
 
@@ -383,12 +444,15 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="contacts-title">
+        <section class="form-section" id="contacts" aria-labelledby="contacts-title">
           <div class="section-heading">
-            <span>12</span>
+            <span class="section-number">12</span>
             <div>
-              <h2 id="contacts-title">Контакты и юридические тексты</h2>
-              <p>Добавьте контактные и юридические данные, если они нужны на сайте или в PDF.</p>
+              <div class="section-title">
+                <h2 id="contacts-title">Контакты и юридические тексты</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Добавьте контакты и реквизиты, если они нужны.</p>
             </div>
           </div>
 
@@ -420,12 +484,15 @@
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="summary-title">
+        <section class="form-section" id="summary" aria-labelledby="summary-title">
           <div class="section-heading">
-            <span>13</span>
+            <span class="section-number">13</span>
             <div>
-              <h2 id="summary-title">Итог и дополнительные пожелания</h2>
-              <p>Коротко напишите, что точно меняем, а что можно оставить по умолчанию.</p>
+              <div class="section-title">
+                <h2 id="summary-title">Итог и дополнительные пожелания</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Коротко напишите главное.</p>
             </div>
           </div>
 
@@ -441,7 +508,7 @@
 
         <div class="form-actions">
           <div>
-            <p>Можно заполнить только важные поля. Всё остальное мы оставим по умолчанию.</p>
+            <p>Проверьте 3 обязательных поля в первом разделе. Остальное можно не заполнять.</p>
             <p class="form-status" id="form-status" role="status"></p>
           </div>
           <button type="submit" id="submit-button">Отправить бриф</button>
