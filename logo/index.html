@@ -23,7 +23,7 @@
           имеют готовые варианты ответов.
         </p>
         <p class="hero__hint">
-          В конце вы получите структурированный бриф и готовый промпт для дизайнера или AI.
+          Ответьте на вопросы — мы получим бриф и подготовим логотип под ваш бренд.
         </p>
         <p>
           <a href="/">← К брифу калькулятора</a>
@@ -881,40 +881,45 @@
             <p>Обязательно только название бренда. Остальное можно заполнить частично.</p>
             <p class="form-status" id="form-status" role="status"></p>
           </div>
-          <button type="submit" id="submit-button">Собрать бриф и отправить</button>
+          <button type="submit" id="submit-button">Отправить бриф</button>
         </div>
       </form>
 
-      <section class="result-screen" id="result-screen" aria-labelledby="result-title" hidden>
+      <section
+        class="success-message"
+        id="success-message"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="success-title"
+        hidden
+      >
+        <div class="success-message__card">
+          <span>Готово</span>
+          <h2 id="success-title">Спасибо! Бриф успешно отправлен.</h2>
+          <p>Мы получили ваши ответы и скоро свяжемся с вами.</p>
+          <div class="success-actions">
+            <button type="button" id="view-brief">Посмотреть отправленный бриф</button>
+            <button type="button" class="ghost-button" id="send-again">Отправить ещё раз</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="brief-review" id="brief-review" aria-labelledby="review-title" hidden>
         <article class="result-card">
-          <div class="hero__badge">Готово</div>
-          <h2 id="result-title">Ваш бриф готов</h2>
-          <p>
-            Мы собрали ваши ответы и превратили их в структурированное ТЗ и AI-промпт для разработки
-            логотипа. Копия также отправлена в Telegram.
-          </p>
-          <p class="form-status" id="result-status" role="status"></p>
+          <div class="hero__badge">Ваши ответы</div>
+          <h2 id="review-title">Как вы заполнили бриф</h2>
+          <p>Ниже — то, что было отправлено. Можно вернуться и отправить бриф ещё раз.</p>
 
           <div class="result-actions">
-            <button type="button" id="copy-prompt">Скопировать промпт</button>
-            <button type="button" class="secondary-button" id="download-brief">Скачать бриф</button>
-            <button type="button" class="ghost-button" id="edit-brief">Изменить ответы</button>
-            <button type="button" class="ghost-button" id="new-brief">Создать новый бриф</button>
+            <button type="button" id="back-to-success">Назад</button>
+            <button type="button" class="ghost-button" id="edit-from-review">Отправить ещё раз</button>
           </div>
 
           <div class="summary-block" id="summary-block"></div>
-
-          <h3 style="margin: 0 0 12px; font-size: 18px">Финальный AI Prompt</h3>
-          <pre class="prompt-box" id="prompt-box"></pre>
-          <p class="prompt-tools">
-            Готовый промпт можно использовать в ChatGPT, Midjourney, Gemini, Claude, передать дизайнеру
-            или студии.
-          </p>
         </article>
       </section>
     </main>
 
-    <div class="copy-toast" id="copy-toast" role="status">Промпт скопирован</div>
     <script src="script.js"></script>
   </body>
 </html>

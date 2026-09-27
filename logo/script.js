@@ -2,27 +2,21 @@ const BRIEF_TYPE = "logo";
 const NAV_VISIBILITY_OFFSET = 80;
 const SECTION_FOCUS_OFFSET = 140;
 const ESCAPE_KEY = "Escape";
-const TOAST_VISIBLE_MS = 2200;
 const EMPTY_VALUE = "не указано";
 const MAX_REFERENCE_ITEMS = 5;
 
 const briefForm = document.querySelector("#brief-form");
-const resultScreen = document.querySelector("#result-screen");
+const successMessage = document.querySelector("#success-message");
+const successCard = successMessage.querySelector(".success-message__card");
+const briefReview = document.querySelector("#brief-review");
 const summaryBlock = document.querySelector("#summary-block");
-const promptBox = document.querySelector("#prompt-box");
 const submitButton = document.querySelector("#submit-button");
 const formStatus = document.querySelector("#form-status");
-const resultStatus = document.querySelector("#result-status");
 const briefNav = document.querySelector(".brief-nav");
 const heroSection = document.querySelector(".hero");
-const copyToast = document.querySelector("#copy-toast");
 const navLinks = [...document.querySelectorAll(".brief-nav__link")];
 const formSections = [...document.querySelectorAll(".form-section[id]")];
 const canHover = window.matchMedia("(hover: hover)").matches;
-
-let latestPrompt = "";
-let latestBriefText = "";
-let toastTimerId = 0;
 
 const joinValues = (values) => values.filter(Boolean).join(", ");
 
@@ -317,238 +311,240 @@ const buildAnswers = () => {
   };
 };
 
-const buildSummary = (answers) => {
-  const audienceParts = [
+const formatLine = (label, value) => {
+  const text = typeof value === "string" ? value.trim() : "";
+  return text ? `${label}: ${text}` : null;
+};
+
+const formatList = (values) => values.filter(Boolean).join("; ");
+
+const buildPromptContext = (answers) => {
+  const business = formatList([
+    answers.businessCategories,
+    answers.businessDescription,
+    answers.mainProduct && `main product: ${answers.mainProduct}`,
+    answers.keyProducts && `key offerings: ${answers.keyProducts}`,
+    answers.heroProduct && `hero product: ${answers.heroProduct}`,
+  ]);
+
+  const audience = formatList([
     answers.audienceGroups,
-    answers.audienceAge && `возраст: ${answers.audienceAge}`,
+    answers.audienceAge && `age: ${answers.audienceAge}`,
     answers.geography,
-    answers.regions,
-  ].filter(Boolean);
+    answers.regions && `regions: ${answers.regions}`,
+  ]);
 
-  const colorParts = [
-    answers.likedColors,
-    answers.brandColors && `брендовые: ${answers.brandColors}`,
-  ].filter(Boolean);
+  const visual = formatList([
+    answers.visualStyle,
+    answers.minimalismLevel && `minimalism level ${answers.minimalismLevel}/5 (1=simplest, 5=more expressive)`,
+  ]);
 
-  const avoidParts = [
-    answers.antiReferences.join("; "),
-    answers.antiReferenceWhy,
-    answers.forbiddenSymbols && `символы: ${answers.forbiddenSymbols}`,
-    answers.forbiddenColors && `цвета: ${answers.forbiddenColors}`,
-    answers.designerRestrictions,
-    answers.legalConstraints,
-  ].filter(Boolean);
+  const colors = formatList([
+    answers.likedColors && `preferred: ${answers.likedColors}`,
+    answers.brandColors && `exact brand colors: ${answers.brandColors}`,
+    answers.forbiddenColors && `forbidden: ${answers.forbiddenColors}`,
+  ]);
 
-  const symbolismParts = [answers.desiredSymbol, answers.symbolIdeas].filter(Boolean);
-  const usageParts = [
-    answers.usage,
-    answers.smallSizeImportance && `маленький размер: ${answers.smallSizeImportance}`,
-    answers.needsIcon && `отдельная иконка: ${answers.needsIcon}`,
-  ].filter(Boolean);
+  const typography = formatList([
+    answers.typographyStyle,
+    answers.languages && `required languages: ${answers.languages}`,
+    answers.needsArabic && `Arabic version: ${answers.needsArabic}`,
+  ]);
+
+  const symbolism = formatList([
+    answers.desiredSymbol && `requested symbol: ${answers.desiredSymbol}`,
+    answers.symbolIdeas && `ideas/metaphors: ${answers.symbolIdeas}`,
+    answers.forbiddenSymbols && `forbidden symbols: ${answers.forbiddenSymbols}`,
+  ]);
+
+  const avoid = formatList([
+    answers.antiReferences.length && `anti-references: ${answers.antiReferences.join("; ")}`,
+    answers.antiReferenceWhy && `why dislike: ${answers.antiReferenceWhy}`,
+    answers.designerRestrictions && `designer restrictions: ${answers.designerRestrictions}`,
+    answers.legalConstraints && `legal/cultural/religious constraints: ${answers.legalConstraints}`,
+  ]);
+
+  const architecture = formatList([
+    answers.subbrands && `sub-brands/directions: ${answers.subbrands}`,
+    answers.brandGrowth && `growth plan: ${answers.brandGrowth}`,
+    answers.competitors.length && `competitors: ${answers.competitors.join(", ")}`,
+    answers.differentiate && `differentiate from competitors: ${answers.differentiate}`,
+    answers.differentiateHow && `how to differentiate: ${answers.differentiateHow}`,
+  ]);
+
+  const scalability = formatList([
+    answers.smallSizeImportance && `small-size performance: ${answers.smallSizeImportance}`,
+    answers.needsIcon && `standalone icon/mark needed: ${answers.needsIcon}`,
+  ]);
+
+  const feeling = formatList([
+    answers.desiredFeeling,
+    answers.idealLogoSentence && `ideal logo in one sentence: "${answers.idealLogoSentence}"`,
+  ]);
 
   return [
-    {
-      title: "1. Brand Summary",
-      text: [
-        answers.brandName,
-        answers.brandNameAlt && `также: ${answers.brandNameAlt}`,
-        answers.slogan && `слоган: ${answers.slogan}`,
-        answers.businessCategories,
-        answers.businessDescription,
-        answers.mainProduct,
-      ]
-        .filter(Boolean)
-        .join(". ") || EMPTY_VALUE,
-    },
-    {
-      title: "2. Design Direction",
-      text: [
-        answers.visualStyle,
-        answers.minimalismLevel && `минимализм: ${answers.minimalismLevel}/5`,
-        answers.positioning,
-      ]
-        .filter(Boolean)
-        .join(". ") || EMPTY_VALUE,
-    },
-    {
-      title: "3. Logo Type",
-      text: answers.logoTypes || EMPTY_VALUE,
-    },
-    {
-      title: "4. Color System",
-      text: colorParts.join(". ") || EMPTY_VALUE,
-    },
-    {
-      title: "5. Typography",
-      text: [
-        answers.typographyStyle,
-        answers.languages && `языки: ${answers.languages}`,
-        answers.needsArabic && `арабская версия: ${answers.needsArabic}`,
-      ]
-        .filter(Boolean)
-        .join(". ") || EMPTY_VALUE,
-    },
-    {
-      title: "6. Symbolism",
-      text: symbolismParts.join(". ") || EMPTY_VALUE,
-    },
-    {
-      title: "7. References",
-      text: answers.references.join("\n") || EMPTY_VALUE,
-    },
-    {
-      title: "8. Anti-References",
-      text: avoidParts.join("\n") || EMPTY_VALUE,
-    },
-    {
-      title: "9. Usage",
-      text: usageParts.join(". ") || EMPTY_VALUE,
-    },
-    {
-      title: "10. Design Constraints",
-      text: [
-        answers.brandFeatures,
-        answers.competitors.length && `конкуренты: ${answers.competitors.join(", ")}`,
-        answers.differentiateHow && `отличаться: ${answers.differentiateHow}`,
-        answers.subbrands && `подбренды: ${answers.subbrands}`,
-        answers.brandGrowth && `развитие: ${answers.brandGrowth}`,
-        answers.extraInfo,
-      ]
-        .filter(Boolean)
-        .join("\n") || EMPTY_VALUE,
-    },
-    {
-      title: "Audience & Feeling",
-      text: [
-        audienceParts.join("; "),
-        answers.personality && `характер: ${answers.personality}`,
-        answers.desiredFeeling,
-        answers.idealLogoSentence && `«${answers.idealLogoSentence}»`,
-        answers.priorities && `приоритеты: ${answers.priorities}`,
-      ]
-        .filter(Boolean)
-        .join("\n") || EMPTY_VALUE,
-    },
-  ];
+    formatLine("Brand name", answers.brandName),
+    formatLine("Alternative naming / scripts", answers.brandNameAlt),
+    formatLine("Slogan", answers.slogan),
+    formatLine("Business", business),
+    formatLine("Target audience", audience),
+    formatLine("Brand positioning", answers.positioning),
+    formatLine("Brand personality", answers.personality),
+    formatLine("Visual direction", visual),
+    formatLine("Preferred logo types", answers.logoTypes),
+    formatLine("Symbolism", symbolism),
+    formatLine("Color system inputs", colors),
+    formatLine("Typography inputs", typography),
+    formatLine("References to learn from", answers.references.join("; ")),
+    formatLine("What to avoid", avoid),
+    formatLine("Primary applications / media", answers.usage),
+    formatLine("Scalability", scalability),
+    formatLine("Brand architecture", architecture),
+    formatLine("Brand specifics", answers.brandFeatures),
+    formatLine("Priorities", answers.priorities),
+    formatLine("Desired perception / emotion", feeling),
+    formatLine("Additional notes", answers.extraInfo),
+  ].filter(Boolean);
 };
 
 const buildPrompt = (answers) => {
-  const audience = [
-    answers.audienceGroups,
-    answers.audienceAge,
-    answers.geography,
-    answers.regions,
-  ]
-    .filter(Boolean)
-    .join("; ");
-
-  const symbolism = [answers.desiredSymbol, answers.symbolIdeas].filter(Boolean).join("; ");
-  const colors = [answers.likedColors, answers.brandColors].filter(Boolean).join("; ");
-  const typography = [
-    answers.typographyStyle,
-    answers.languages && `languages: ${answers.languages}`,
-    answers.needsArabic && `Arabic version: ${answers.needsArabic}`,
-  ]
-    .filter(Boolean)
-    .join("; ");
-
-  const avoid = [
-    answers.antiReferences.join("; "),
-    answers.antiReferenceWhy,
-    answers.forbiddenSymbols,
-    answers.forbiddenColors,
-    answers.designerRestrictions,
-    answers.legalConstraints,
-  ]
-    .filter(Boolean)
-    .join("; ");
-
-  const special = [
-    answers.brandFeatures,
-    answers.brandNameAlt && `alt name: ${answers.brandNameAlt}`,
-    answers.slogan && `slogan: ${answers.slogan}`,
-    answers.needsIcon && `standalone icon: ${answers.needsIcon}`,
-    answers.smallSizeImportance && `small size: ${answers.smallSizeImportance}`,
-    answers.extraInfo,
-  ]
-    .filter(Boolean)
-    .join("; ");
-
-  const perception = [answers.desiredFeeling, answers.idealLogoSentence]
-    .filter(Boolean)
-    .join("; ");
+  const brandName = valueOrFallback(answers.brandName);
+  const contextLines = buildPromptContext(answers);
 
   return [
-    `Create a professional logo identity for ${valueOrFallback(answers.brandName)}.`,
+    "ROLE",
+    "You are a senior brand designer and art director.",
+    "Your task is to create a complete professional BRAND BOOK (brand guidelines), not a single logo sketch.",
     "",
-    `Business: ${valueOrFallback(
-      [answers.businessCategories, answers.businessDescription, answers.mainProduct]
-        .filter(Boolean)
-        .join(". "),
-    )}`,
+    "PRIMARY GOAL",
+    `Build a full visual identity system and brand book for «${brandName}».`,
+    "The brand book must be practical, coherent, and ready to guide designers, marketers, and developers.",
     "",
-    `Target audience: ${valueOrFallback(audience)}`,
+    "INPUT BRIEF (from client)",
+    ...contextLines,
     "",
-    `Brand positioning: ${valueOrFallback(answers.positioning)}`,
+    "REQUIRED BRAND BOOK STRUCTURE",
+    "Produce the brand book in this exact order:",
     "",
-    `Brand personality: ${valueOrFallback(answers.personality)}`,
+    "1. Brand Overview",
+    "- Brand name, meaning, and short positioning statement",
+    "- Mission / essence in 1–2 sentences",
+    "- Audience and market context",
     "",
-    `Visual direction: ${valueOrFallback(
-      [answers.visualStyle, answers.minimalismLevel && `minimalism ${answers.minimalismLevel}/5`]
-        .filter(Boolean)
-        .join(", "),
-    )}`,
+    "2. Brand Strategy Foundation",
+    "- Positioning",
+    "- Personality traits",
+    "- Tone of voice (how the brand should feel and speak)",
+    "- Key messages and promise",
     "",
-    `Logo type: ${valueOrFallback(answers.logoTypes)}`,
+    "3. Logo System",
+    "- Primary logo",
+    "- Secondary / alternative versions (horizontal, stacked, monochrome, reverse)",
+    "- Icon / symbol / favicon version if relevant",
+    "- Clear space, minimum size, alignment rules",
+    "- Incorrect logo usage (do not distort, recolor arbitrarily, add effects, etc.)",
     "",
-    `Symbolism: ${valueOrFallback(symbolism)}`,
+    "4. Color System",
+    "- Primary palette with HEX / RGB / CMYK where possible",
+    "- Secondary and neutral colors",
+    "- Color roles (background, accent, text, UI, print)",
+    "- Accessibility contrast notes",
+    "- Forbidden color combinations if needed",
     "",
-    `Color palette: ${valueOrFallback(colors)}`,
+    "5. Typography System",
+    "- Primary typeface and secondary typeface recommendations",
+    "- Hierarchy: H1–H3, body, caption, buttons",
+    "- Language support requirements from the brief",
+    "- Arabic / multilingual rules if requested",
     "",
-    `Typography: ${valueOrFallback(typography)}`,
+    "6. Graphic Language & Symbolism",
+    "- Core metaphor / symbol meaning",
+    "- Supporting shapes, patterns, motifs, photography/illustration style",
+    "- What visual ideas are allowed and what must never appear",
     "",
-    `References: ${valueOrFallback(answers.references.join("; "))}`,
+    "7. Application Guidelines",
+    "- Mockups / rules for every relevant surface from the brief (web, app, social, packaging, signage, merch, docs, ads, favicon, etc.)",
+    "- Digital and print adaptation notes",
+    "- Small-size and icon behavior",
     "",
-    `Avoid: ${valueOrFallback(avoid)}`,
+    "8. Brand Architecture (if relevant)",
+    "- How the master brand relates to products / sub-brands / future ecosystem",
     "",
-    `Usage: ${valueOrFallback(answers.usage)}`,
+    "9. Competitive Differentiation",
+    "- How this identity should stand apart from competitors mentioned in the brief",
     "",
-    `Special requirements: ${valueOrFallback(special)}`,
+    "10. Final Design Direction Summary",
+    "- 3–5 recommended concept directions for the logo/identity",
+    "- Which direction best matches priorities and why",
     "",
-    "Develop several distinct logo concepts while maintaining a clear and coherent brand strategy.",
+    "OUTPUT QUALITY RULES",
+    "- Think like a brand book author, not a logo generator only.",
+    "- Be specific and actionable. Avoid vague adjectives without design decisions.",
+    "- Recommend concrete colors, type styles, logo construction logic, and usage rules.",
+    "- Keep the system scalable, recognizable, and durable.",
+    "- Prefer distinctive, original solutions over generic AI logo clichés.",
+    "- Do not imitate existing brands from references; extract principles only.",
+    "- Respect all restrictions, forbidden symbols/colors, cultural and legal constraints.",
+    "- If some brief fields are missing, make reasonable professional assumptions and mark them as assumptions.",
     "",
-    "The logo must be distinctive, scalable, recognizable, and functional across digital and physical applications.",
-    "",
-    "Avoid generic templates, excessive details, unnecessary visual elements, clichés, and direct imitation of existing brands.",
-    "",
-    `Prioritize ${valueOrFallback(answers.priorities)}.`,
-    "",
-    `The final identity should communicate ${valueOrFallback(perception)}.`,
+    "SUCCESS CRITERIA",
+    `A designer should be able to implement the full identity of «${brandName}» from your brand book alone.`,
+    "The result must feel like a premium, production-ready brand guidelines document.",
   ].join("\n");
 };
 
-const buildDownloadText = (answers, summary, prompt) => {
-  const summaryText = summary
-    .map((item) => `${item.title}\n${item.text}`)
-    .join("\n\n");
+const buildUserReview = (answers) => {
+  const rows = [
+    ["Название бренда", answers.brandName],
+    ["Дополнительное написание", answers.brandNameAlt],
+    ["Слоган", answers.slogan],
+    ["Категории бизнеса", answers.businessCategories],
+    ["Описание бизнеса", answers.businessDescription],
+    ["Основной продукт", answers.mainProduct],
+    ["Ключевые продукты", answers.keyProducts],
+    ["Главный продукт", answers.heroProduct],
+    ["Аудитория", answers.audienceGroups],
+    ["Возраст", answers.audienceAge],
+    ["География", answers.geography],
+    ["Страны / регионы", answers.regions],
+    ["Позиционирование", answers.positioning],
+    ["Характер бренда", answers.personality],
+    ["Визуальный стиль", answers.visualStyle],
+    ["Минимализм", answers.minimalismLevel && `${answers.minimalismLevel}/5`],
+    ["Тип логотипа", answers.logoTypes],
+    ["Символ", answers.desiredSymbol],
+    ["Образы и идеи", answers.symbolIdeas],
+    ["Запрещённые символы", answers.forbiddenSymbols],
+    ["Цвета", answers.likedColors],
+    ["Цвета бренда", answers.brandColors],
+    ["Запрещённые цвета", answers.forbiddenColors],
+    ["Типографика", answers.typographyStyle],
+    ["Арабская версия", answers.needsArabic],
+    ["Языки", answers.languages],
+    ["Референсы", answers.references.join("\n")],
+    ["Антиреференсы", answers.antiReferences.join("\n")],
+    ["Что не нравится в антиреференсах", answers.antiReferenceWhy],
+    ["Конкуренты", answers.competitors.join(", ")],
+    ["Отличие от конкурентов", answers.differentiateHow],
+    ["Особенности бренда", answers.brandFeatures],
+    ["Где используется", answers.usage],
+    ["Маленький размер", answers.smallSizeImportance],
+    ["Отдельная иконка", answers.needsIcon],
+    ["Дочерние направления", answers.subbrands],
+    ["Развитие бренда", answers.brandGrowth],
+    ["Ограничения для дизайнера", answers.designerRestrictions],
+    ["Юридические / культурные ограничения", answers.legalConstraints],
+    ["Желаемое ощущение", answers.desiredFeeling],
+    ["Идеальный логотип", answers.idealLogoSentence],
+    ["Приоритеты", answers.priorities],
+    ["Дополнительно", answers.extraInfo],
+    ["Контакт", answers.contactName],
+    ["Связь", answers.contactInfo],
+  ];
 
-  const contactLines = [
-    answers.contactName ? `Контакт: ${answers.contactName}` : null,
-    answers.contactInfo ? `Связь: ${answers.contactInfo}` : null,
-  ].filter(Boolean);
-
-  return [
-    "БРИФ НА ЛОГОТИП",
-    "",
-    `Бренд: ${answers.brandName || EMPTY_VALUE}`,
-    ...contactLines,
-    "",
-    summaryText,
-    "",
-    "--- AI PROMPT ---",
-    "",
-    prompt,
-  ].join("\n");
+  return rows
+    .filter(([, value]) => Boolean(value))
+    .map(([title, text]) => ({ title, text }));
 };
 
 const renderSummary = (summary) => {
@@ -564,66 +560,47 @@ const renderSummary = (summary) => {
     .join("");
 };
 
-const showResultScreen = () => {
+const showSuccessMessage = () => {
+  briefReview.hidden = true;
+  briefReview.classList.remove("is-visible");
+  successMessage.hidden = false;
+  document.body.classList.add("has-modal");
+  document.querySelector("#view-brief").focus();
+};
+
+const hideSuccessMessage = () => {
+  successMessage.hidden = true;
+  document.body.classList.remove("has-modal");
+};
+
+const showBriefReview = () => {
+  hideSuccessMessage();
   briefForm.classList.add("is-hidden");
   briefNav.classList.remove("is-visible", "is-expanded");
-  resultScreen.hidden = false;
-  resultScreen.classList.add("is-visible");
+  briefReview.hidden = false;
+  briefReview.classList.add("is-visible");
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
 const showBriefForm = () => {
-  resultScreen.hidden = true;
-  resultScreen.classList.remove("is-visible");
+  hideSuccessMessage();
+  briefReview.hidden = true;
+  briefReview.classList.remove("is-visible");
   briefForm.classList.remove("is-hidden");
   updateNavVisibility();
   updateActiveSection();
   submitButton.focus();
 };
 
-const resetBrief = () => {
-  briefForm.reset();
-  syncConditionalFields();
-  document.querySelectorAll("[data-kind]").forEach((list) => {
-    const items = [...list.querySelectorAll("[data-item]")];
-    items.slice(1).forEach((item) => item.remove());
-    renameListItems(list);
-  });
-  formStatus.textContent = "";
-  latestPrompt = "";
-  latestBriefText = "";
-  showBriefForm();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
-
-const showToast = (message) => {
-  copyToast.textContent = message;
-  copyToast.classList.add("is-visible");
-  window.clearTimeout(toastTimerId);
-  toastTimerId = window.setTimeout(() => {
-    copyToast.classList.remove("is-visible");
-  }, TOAST_VISIBLE_MS);
-};
-
-const copyPrompt = async () => {
-  try {
-    await navigator.clipboard.writeText(latestPrompt);
-    showToast("Промпт скопирован");
-  } catch (error) {
-    formStatus.textContent = "Не удалось скопировать промпт.";
+const handleSuccessMessageClick = (event) => {
+  if (!successCard.contains(event.target)) {
+    showBriefForm();
   }
 };
 
-const downloadBrief = () => {
-  const blob = new Blob([latestBriefText], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  const brandSlug = getFieldValue("brandName").toLowerCase().replace(/\s+/g, "-") || "logo";
-
-  link.href = url;
-  link.download = `logo-brief-${brandSlug}.txt`;
-  link.click();
-  URL.revokeObjectURL(url);
+const setSubmitState = (isLoading) => {
+  submitButton.disabled = isLoading;
+  submitButton.textContent = isLoading ? "Отправляем..." : "Отправить бриф";
 };
 
 const getSendErrorMessage = async (response) => {
@@ -633,11 +610,6 @@ const getSendErrorMessage = async (response) => {
   } catch (error) {
     return "Не удалось отправить бриф. Попробуйте ещё раз.";
   }
-};
-
-const setSubmitState = (isLoading) => {
-  submitButton.disabled = isLoading;
-  submitButton.textContent = isLoading ? "Собираем и отправляем..." : "Собрать бриф и отправить";
 };
 
 const sendBrief = async ({ fields, prompt }) => {
@@ -743,6 +715,11 @@ const handleRemoveItem = (event) => {
 
 const handleEscapePress = (event) => {
   if (event.key !== ESCAPE_KEY) {
+    return;
+  }
+
+  if (!successMessage.hidden) {
+    showBriefForm();
     return;
   }
 
@@ -948,31 +925,16 @@ const closeTermTipsOnOutsideClick = (event) => {
 briefForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   formStatus.textContent = "";
-  resultStatus.textContent = "";
   setSubmitState(true);
 
   try {
     const answers = buildAnswers();
-    const summary = buildSummary(answers);
     const prompt = buildPrompt(answers);
     const fields = getBriefFields();
-    let sendError = "";
 
-    latestPrompt = prompt;
-    latestBriefText = buildDownloadText(answers, summary, prompt);
-
-    try {
-      await sendBrief({ fields, prompt });
-    } catch (error) {
-      sendError = error.message;
-    }
-
-    renderSummary(summary);
-    promptBox.textContent = prompt;
-    resultStatus.textContent = sendError
-      ? `${sendError} Промпт всё равно готов — скопируйте или скачайте бриф.`
-      : "";
-    showResultScreen();
+    await sendBrief({ fields, prompt });
+    renderSummary(buildUserReview(answers));
+    showSuccessMessage();
   } catch (error) {
     formStatus.textContent = error.message;
   } finally {
@@ -989,10 +951,11 @@ document.addEventListener("click", handleAddItem);
 document.addEventListener("click", handleRemoveItem);
 document.addEventListener("click", handleTermTipClick);
 document.addEventListener("click", closeTermTipsOnOutsideClick);
-document.querySelector("#copy-prompt").addEventListener("click", copyPrompt);
-document.querySelector("#download-brief").addEventListener("click", downloadBrief);
-document.querySelector("#edit-brief").addEventListener("click", showBriefForm);
-document.querySelector("#new-brief").addEventListener("click", resetBrief);
+document.querySelector("#view-brief").addEventListener("click", showBriefReview);
+document.querySelector("#send-again").addEventListener("click", showBriefForm);
+document.querySelector("#back-to-success").addEventListener("click", showSuccessMessage);
+document.querySelector("#edit-from-review").addEventListener("click", showBriefForm);
+successMessage.addEventListener("click", handleSuccessMessageClick);
 briefNav.addEventListener("click", handleNavClick);
 document.addEventListener("click", closeNavOnOutsideClick);
 document.addEventListener("keydown", handleEscapePress);

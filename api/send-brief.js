@@ -12,27 +12,32 @@ const getTelegramConfig = () => ({
 
 const getBriefHeader = (briefType) => {
   if (briefType === LOGO_BRIEF_TYPE) {
-    return "БРИФ НА ЛОГОТИП\n\n";
+    return "БРИФ НА ЛОГОТИП\nПолноценный AI-промпт для создания брендбука\n\n";
   }
 
   return "Новый бриф с сайта\n\n";
 };
 
 const buildBriefText = ({ fields, briefType, prompt }) => {
-  const filledFields = fields.filter(fieldHasContent);
   const header = getBriefHeader(briefType);
+  const brandBookPrompt = prompt?.trim();
 
-  if (!filledFields.length && !prompt) {
+  if (briefType === LOGO_BRIEF_TYPE) {
+    if (!brandBookPrompt) {
+      return `${header}Пользователь отправил пустую форму.`;
+    }
+
+    return `${header}${brandBookPrompt}`;
+  }
+
+  const filledFields = fields.filter(fieldHasContent);
+
+  if (!filledFields.length) {
     return `${header}Пользователь отправил пустую форму.`;
   }
 
   const lines = filledFields.map((field) => `• ${field.label}:\n${field.value}`);
-  const body = lines.length ? lines.join("\n\n") : "Ответы не заполнены.";
-  const promptBlock = prompt?.trim()
-    ? `\n\n--- AI PROMPT ---\n\n${prompt.trim()}`
-    : "";
-
-  return `${header}${body}${promptBlock}`;
+  return `${header}${lines.join("\n\n")}`;
 };
 
 const splitMessage = (text) => {
