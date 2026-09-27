@@ -279,14 +279,21 @@ button {
   grid-row: 1;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 8px 10px;
   min-height: 42px;
+  min-width: 0;
 }
 
 .section-heading h2 {
   margin: 0;
+  max-width: 100%;
   font-size: clamp(22px, 3vw, 30px);
   letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.section-meta {
+  flex: 0 0 auto;
 }
 
 .section-meta,
@@ -341,17 +348,22 @@ label {
 }
 
 .field-label {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
+  display: block;
+  line-height: 1.4;
+}
+
+.field-label .required-badge,
+.field-label .term-tip {
+  vertical-align: middle;
+}
+
+.field-label .required-badge {
+  margin-left: 6px;
 }
 
 .term {
   position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  display: inline;
   max-width: 100%;
 }
 
@@ -359,8 +371,8 @@ label {
   display: inline-grid;
   width: 18px;
   height: 18px;
-  flex: 0 0 auto;
   place-items: center;
+  margin-left: 4px;
   border: 1px solid rgba(184, 134, 47, 0.35);
   border-radius: 50%;
   background: var(--accent-soft);
@@ -369,6 +381,7 @@ label {
   font-weight: 700;
   line-height: 1;
   padding: 0;
+  vertical-align: -0.15em;
   box-shadow: none;
   transition:
     background-color 0.2s ease,
@@ -509,20 +522,32 @@ textarea:focus {
 }
 
 .checkbox-grid label {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 10px;
   min-height: 54px;
   padding: 14px 16px;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
   background: var(--surface-muted);
+  line-height: 1.35;
+}
+
+.checkbox-grid label .term {
+  display: inline;
+}
+
+.checkbox-grid label .term-tip {
+  display: inline-grid;
+  vertical-align: -0.15em;
+  margin-left: 4px;
 }
 
 .checkbox-grid input {
   width: 18px;
   min-height: 18px;
+  margin-top: 1px;
   accent-color: var(--accent);
 }
 
