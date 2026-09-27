@@ -1,6 +1,7 @@
 const TELEGRAM_MESSAGE_LIMIT = 3900;
 const BRIEF_SEND_ERROR = "Не удалось отправить бриф. Попробуйте ещё раз.";
 const TELEGRAM_CONFIG_ERROR = "На сервере не настроена отправка в Telegram.";
+const LOGO_BRIEF_TYPE = "logo";
 
 const fieldHasContent = (field) => field?.label && field?.value;
 
@@ -9,16 +10,29 @@ const getTelegramConfig = () => ({
   chatId: process.env.TELEGRAM_CHAT_ID,
 });
 
-const buildBriefText = (fields) => {
-  const filledFields = fields.filter(fieldHasContent);
+const getBriefHeader = (briefType) => {
+  if (briefType === LOGO_BRIEF_TYPE) {
+    return "БРИФ НА ЛОГОТИП\n\n";
+  }
 
-  if (!filledFields.length) {
-    return "Новый бриф\n\nПользователь отправил пустую форму.";
+  return "Новый бриф с сайта\n\n";
+};
+
+const buildBriefText = ({ fields, briefType, prompt }) => {
+  const filledFields = fields.filter(fieldHasContent);
+  const header = getBriefHeader(briefType);
+
+  if (!filledFields.length && !prompt) {
+    return `${header}Пользователь отправил пустую форму.`;
   }
 
   const lines = filledFields.map((field) => `• ${field.label}:\n${field.value}`);
+  const body = lines.length ? lines.join("\n\n") : "Ответы не заполнены.";
+  const promptBlock = prompt?.trim()
+    ? `\n\n--- AI PROMPT ---\n\n${prompt.trim()}`
+    : "";
 
-  return `Новый бриф с сайта\n\n${lines.join("\n\n")}`;
+  return `${header}${body}${promptBlock}`;
 };
 
 const splitMessage = (text) => {
@@ -57,6 +71,8 @@ module.exports = async (request, response) => {
   try {
     const { botToken, chatId } = getTelegramConfig();
     const fields = Array.isArray(request.body?.fields) ? request.body.fields : [];
+    const briefType = typeof request.body?.briefType === "string" ? request.body.briefType : "";
+    const prompt = typeof request.body?.prompt === "string" ? request.body.prompt : "";
 
     if (!botToken || !chatId) {
       console.error(TELEGRAM_CONFIG_ERROR);
@@ -64,7 +80,7 @@ module.exports = async (request, response) => {
       return;
     }
 
-    const messages = splitMessage(buildBriefText(fields));
+    const messages = splitMessage(buildBriefText({ fields, briefType, prompt }));
 
     await Promise.all(messages.map((text) => sendTelegramMessage({ botToken, chatId, text })));
     response.status(200).json({ ok: true });

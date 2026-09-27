@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Бриф на создание логотипа</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero__badge">Бриф на логотип</div>
+        <h1 id="page-title">Создадим логотип, который соответствует вашему бизнесу</h1>
+        <p>
+          Ответьте на несколько вопросов. Необязательно быть дизайнером — большинство вопросов
+          имеют готовые варианты ответов.
+        </p>
+        <p class="hero__hint">
+          В конце вы получите структурированный бриф и готовый промпт для дизайнера или AI.
+        </p>
+        <p>
+          <a href="/">← К брифу калькулятора</a>
+        </p>
+      </section>
+
+      <nav class="brief-nav" aria-label="Навигация по брифу">
+        <a href="#brand" class="brief-nav__link is-active">Бренд</a>
+        <a href="#business" class="brief-nav__link">Бизнес</a>
+        <a href="#product" class="brief-nav__link">Продукт</a>
+        <a href="#audience" class="brief-nav__link">Аудитория</a>
+        <a href="#positioning" class="brief-nav__link">Позиция</a>
+        <a href="#personality" class="brief-nav__link">Характер</a>
+        <a href="#visual" class="brief-nav__link">Стиль</a>
+        <a href="#logo-type" class="brief-nav__link">Тип</a>
+        <a href="#symbolism" class="brief-nav__link">Символы</a>
+        <a href="#colors" class="brief-nav__link">Цвета</a>
+        <a href="#typography" class="brief-nav__link">Шрифт</a>
+        <a href="#references" class="brief-nav__link">Референсы</a>
+        <a href="#anti-references" class="brief-nav__link">Анти</a>
+        <a href="#competitors" class="brief-nav__link">Конкуренты</a>
+        <a href="#features" class="brief-nav__link">Особенности</a>
+        <a href="#usage" class="brief-nav__link">Где</a>
+        <a href="#scalability" class="brief-nav__link">Масштаб</a>
+        <a href="#architecture" class="brief-nav__link">Архитектура</a>
+        <a href="#constraints" class="brief-nav__link">Ограничения</a>
+        <a href="#impression" class="brief-nav__link">Впечатление</a>
+        <a href="#priorities" class="brief-nav__link">Приоритеты</a>
+        <a href="#extra" class="brief-nav__link">Ещё</a>
+      </nav>
+
+      <form class="brief-form" id="brief-form">
+        <section class="form-section" id="brand" aria-labelledby="brand-title">
+          <div class="section-heading">
+            <span class="section-number">01</span>
+            <div>
+              <div class="section-title">
+                <h2 id="brand-title">О бренде</h2>
+                <span class="section-meta section-meta--required">Обязательно</span>
+              </div>
+              <p>Как называется бренд и есть ли у него слоган.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label class="form-grid__wide">
+              <span class="field-label">Название бренда <span class="required-badge">Обязательно</span></span>
+              <input name="brandName" type="text" placeholder="Например, MURABUY" required />
+            </label>
+            <label class="form-grid__wide">
+              Дополнительное написание
+              <input name="brandNameAlt" type="text" placeholder="Английская, арабская или другая версия" />
+            </label>
+            <div class="form-grid__wide field-group">
+              <p class="field-group__title">Есть ли у бренда слоган?</p>
+              <div class="choice-grid choice-grid--compact" data-choice-group="hasSlogan">
+                <label class="choice-option">
+                  <input name="hasSlogan" type="radio" value="Да" data-show="slogan-field" />
+                  Да
+                </label>
+                <label class="choice-option">
+                  <input name="hasSlogan" type="radio" value="Нет" />
+                  Нет
+                </label>
+              </div>
+              <label class="conditional-field" id="slogan-field" data-depends="hasSlogan" data-when="Да">
+                Слоган
+                <input name="slogan" type="text" placeholder="Короткая фраза бренда" />
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" id="business" aria-labelledby="business-title">
+          <div class="section-heading">
+            <span class="section-number">02</span>
+            <div>
+              <div class="section-title">
+                <h2 id="business-title">О бизнесе</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Чем занимается бизнес и что вы продаёте.</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <p class="field-group__title">Категории бизнеса</p>
+            <div class="choice-grid">
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="E-commerce" /> E-commerce</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="IT / Software" /> IT / Software</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Финансы" /> Финансы</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Образование" /> Образование</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Медицина" /> Медицина</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Ресторан / Food" /> Ресторан / Food</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Одежда / Fashion" /> Одежда / Fashion</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Красота" /> Красота</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Строительство" /> Строительство</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Недвижимость" /> Недвижимость</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Услуги" /> Услуги</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Медиа" /> Медиа</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Спорт" /> Спорт</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Исламские продукты / услуги" /> Исламские продукты / услуги</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Технологии / Electronics" /> Технологии / Electronics</label>
+              <label class="choice-option"><input name="businessCategories" type="checkbox" value="Другое" data-show="business-other" /> Другое</label>
+            </div>
+            <label class="conditional-field" id="business-other" data-depends-checkbox="businessCategories" data-when="Другое">
+              Если «Другое»
+              <input name="businessOther" type="text" placeholder="Укажите свою категорию" />
+            </label>
+            <label>
+              Кратко опишите бизнес
+              <textarea name="businessDescription" rows="4" placeholder="Что вы продаёте или какую услугу предоставляете?"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" id="product" aria-labelledby="product-title">
+          <div class="section-heading">
+            <span class="section-number">03</span>
+            <div>
+              <div class="section-title">
+                <h2 id="product-title">Продукт / услуга</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Что является ядром предложения.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label class="form-grid__wide">
+              Основной продукт или услуга
+              <textarea name="mainProduct" rows="3" placeholder="Главное, что вы предлагаете клиентам"></textarea>
+            </label>
+            <label class="form-grid__wide">
+              Ключевые продукты или услуги
+              <textarea name="keyProducts" rows="3" placeholder="Перечислите важные направления"></textarea>
+            </label>
+            <div class="form-grid__wide field-group">
+              <p class="field-group__title">Есть ли один главный продукт?</p>
+              <div class="choice-grid choice-grid--compact">
+                <label class="choice-option">
+                  <input name="hasHeroProduct" type="radio" value="Да" data-show="hero-product-field" />
+                  Да
+                </label>
+                <label class="choice-option">
+                  <input name="hasHeroProduct" type="radio" value="Нет" />
+                  Нет
+                </label>
+              </div>
+              <label class="conditional-field" id="hero-product-field" data-depends="hasHeroProduct" data-when="Да">
+                Главный продукт
+                <input name="heroProduct" type="text" placeholder="Название главного продукта" />
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" id="audience" aria-labelledby="audience-title">
+          <div class="section-heading">
+            <span class="section-number">04</span>
+            <div>
+              <div class="section-title">
+                <h2 id="audience-title">Целевая аудитория</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Для кого предназначен бренд.</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <p class="field-group__title">Основные группы</p>
+            <div class="choice-grid">
+              <label class="choice-option"><input name="audienceGroups" type="checkbox" value="Подростки" /> Подростки</label>
+              <label class="choice-option"><input name="audienceGroups" type="checkbox" value="Молодёжь" /> Молодёжь</label>
+              <label class="choice-option"><input name="audienceGroups" type="checkbox" value="Взрослые" /> Взрослые</label>
+              <label class="choice-option"><input name="audienceGroups" type="checkbox" value="Семьи" /> Семьи</label>
+              <label class="choice-option"><input name="audienceGroups" type="checkbox" value="Предприниматели" /> Предприниматели</label>
+              <label class="choice-option"><input name="audienceGroups" type="checkbox" value="Профессионалы" /> Профессионалы</label>
+              <label class="choice-option"><input name="audienceGroups" type="checkbox" value="Премиум-аудитория" /> Премиум-аудитория</label>
+              <label class="choice-option"><input name="audienceGroups" type="checkbox" value="Массовый рынок" /> Массовый рынок</label>
+              <label class="choice-option"><input name="audienceGroups" type="checkbox" value="Дети / родители" /> Дети / родители</label>
+              <label class="choice-option"><input name="audienceGroups" type="checkbox" value="Корпоративные клиенты" /> Корпоративные клиенты</label>
+              <label class="choice-option"><input name="audienceGroups" type="checkbox" value="Другое" /> Другое</label>
+            </div>
+
+            <p class="field-group__title">Возраст аудитории</p>
+            <div class="choice-grid choice-grid--compact">
+              <label class="choice-option"><input name="audienceAge" type="radio" value="До 18" /> До 18</label>
+              <label class="choice-option"><input name="audienceAge" type="radio" value="18–25" /> 18–25</label>
+              <label class="choice-option"><input name="audienceAge" type="radio" value="25–35" /> 25–35</label>
+              <label class="choice-option"><input name="audienceAge" type="radio" value="35–50" /> 35–50</label>
+              <label class="choice-option"><input name="audienceAge" type="radio" value="50+" /> 50+</label>
+              <label class="choice-option"><input name="audienceAge" type="radio" value="Разный" /> Разный</label>
+            </div>
+
+            <p class="field-group__title">География</p>
+            <div class="choice-grid">
+              <label class="choice-option"><input name="geography" type="checkbox" value="Локальный рынок" /> Локальный рынок</label>
+              <label class="choice-option"><input name="geography" type="checkbox" value="Один город" /> Один город</label>
+              <label class="choice-option"><input name="geography" type="checkbox" value="Одна страна" /> Одна страна</label>
+              <label class="choice-option"><input name="geography" type="checkbox" value="Несколько стран" /> Несколько стран</label>
+              <label class="choice-option"><input name="geography" type="checkbox" value="Международный рынок" /> Международный рынок</label>
+            </div>
+
+            <label>
+              Страны / регионы
+              <input name="regions" type="text" placeholder="Например, Россия, ОАЭ, Казахстан" />
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" id="positioning" aria-labelledby="positioning-title">
+          <div class="section-heading">
+            <span class="section-number">05</span>
+            <div>
+              <div class="section-title">
+                <h2 id="positioning-title">Позиционирование</h2>
+                <span class="section-meta">До 5</span>
+              </div>
+              <p>Как бренд должен восприниматься.</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <p class="field-hint">Выберите до 5 характеристик.</p>
+            <div class="choice-grid" data-max-checks="5" data-max-label="позиционирование">
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Премиальный" /> Премиальный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Доступный" /> Доступный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Современный" /> Современный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Технологичный" /> Технологичный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Надёжный" /> Надёжный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Минималистичный" /> Минималистичный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Элегантный" /> Элегантный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Молодёжный" /> Молодёжный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Строгий" /> Строгий</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Дружелюбный" /> Дружелюбный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Смелый" /> Смелый</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Спокойный" /> Спокойный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Экологичный" /> Экологичный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Инновационный" /> Инновационный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Традиционный" /> Традиционный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Экспертный" /> Экспертный</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Люксовый" /> Люксовый</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Массовый" /> Массовый</label>
+              <label class="choice-option"><input name="positioning" type="checkbox" value="Другой" data-show="positioning-other" /> Другой</label>
+            </div>
+            <label class="conditional-field" id="positioning-other" data-depends-checkbox="positioning" data-when="Другой">
+              Своя характеристика
+              <input name="positioningOther" type="text" placeholder="Опишите восприятие бренда" />
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" id="personality" aria-labelledby="personality-title">
+          <div class="section-heading">
+            <span class="section-number">06</span>
+            <div>
+              <div class="section-title">
+                <h2 id="personality-title">Характер бренда</h2>
+                <span class="section-meta">До 5</span>
+              </div>
+              <p>Если бы бренд был человеком, каким бы он был?</p>
+            </div>
+          </div>
+
+          <div class="choice-grid" data-max-checks="5" data-max-label="характер бренда">
+            <label class="choice-option"><input name="personality" type="checkbox" value="Спокойный" /> Спокойный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Уверенный" /> Уверенный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Сдержанный" /> Сдержанный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Энергичный" /> Энергичный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Амбициозный" /> Амбициозный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Интеллектуальный" /> Интеллектуальный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Дружелюбный" /> Дружелюбный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Строгий" /> Строгий</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Смелый" /> Смелый</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Элегантный" /> Элегантный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Молодой" /> Молодой</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Солидный" /> Солидный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Традиционный" /> Традиционный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Современный" /> Современный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Экспрессивный" /> Экспрессивный</label>
+            <label class="choice-option"><input name="personality" type="checkbox" value="Минималистичный" /> Минималистичный</label>
+          </div>
+        </section>
+
+        <section class="form-section" id="visual" aria-labelledby="visual-title">
+          <div class="section-heading">
+            <span class="section-number">07</span>
+            <div>
+              <div class="section-title">
+                <h2 id="visual-title">Визуальный стиль</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Какой стиль вам ближе и насколько минималистичным должен быть логотип.</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <p class="field-group__title">Стиль</p>
+            <div class="choice-grid">
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Minimal" /> Minimal</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Modern" /> Modern</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Premium" /> Premium</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Luxury" /> Luxury</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Tech" /> Tech</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Corporate" /> Corporate</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Editorial" /> Editorial</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Geometric" /> Geometric</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Organic" /> Organic</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Bold" /> Bold</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Friendly" /> Friendly</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Elegant" /> Elegant</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Classic" /> Classic</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Retro" /> Retro</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Futuristic" /> Futuristic</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Handcrafted" /> Handcrafted</label>
+              <label class="choice-option"><input name="visualStyle" type="checkbox" value="Experimental" /> Experimental</label>
+            </div>
+
+            <p class="field-group__title">Насколько минималистичным должен быть логотип?</p>
+            <div class="scale-options">
+              <label class="choice-option"><input name="minimalismLevel" type="radio" value="1" /> 1</label>
+              <label class="choice-option"><input name="minimalismLevel" type="radio" value="2" /> 2</label>
+              <label class="choice-option"><input name="minimalismLevel" type="radio" value="3" /> 3</label>
+              <label class="choice-option"><input name="minimalismLevel" type="radio" value="4" /> 4</label>
+              <label class="choice-option"><input name="minimalismLevel" type="radio" value="5" /> 5</label>
+            </div>
+            <div class="scale-labels">
+              <span>1 — максимально простой</span>
+              <span>5 — более сложный</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" id="logo-type" aria-labelledby="logo-type-title">
+          <div class="section-heading">
+            <span class="section-number">08</span>
+            <div>
+              <div class="section-title">
+                <h2 id="logo-type-title">Тип логотипа</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Можно выбрать несколько вариантов.</p>
+            </div>
+          </div>
+
+          <div class="choice-grid">
+            <label class="choice-option"><input name="logoTypes" type="checkbox" value="Wordmark — только название" /> Wordmark — только название</label>
+            <label class="choice-option"><input name="logoTypes" type="checkbox" value="Lettermark — инициалы / буквы" /> Lettermark — инициалы / буквы</label>
+            <label class="choice-option"><input name="logoTypes" type="checkbox" value="Symbol — отдельный символ" /> Symbol — отдельный символ</label>
+            <label class="choice-option"><input name="logoTypes" type="checkbox" value="Combination — символ + название" /> Combination — символ + название</label>
+            <label class="choice-option"><input name="logoTypes" type="checkbox" value="Emblem — эмблема" /> Emblem — эмблема</label>
+            <label class="choice-option"><input name="logoTypes" type="checkbox" value="Mascot — персонаж" /> Mascot — персонаж</label>
+            <label class="choice-option"><input name="logoTypes" type="checkbox" value="Abstract — абстрактный знак" /> Abstract — абстрактный знак</label>
+            <label class="choice-option"><input name="logoTypes" type="checkbox" value="Не знаю — предложите варианты" /> Не знаю — предложите варианты</label>
+          </div>
+        </section>
+
+        <section class="form-section" id="symbolism" aria-labelledby="symbolism-title">
+          <div class="section-heading">
+            <span class="section-number">09</span>
+            <div>
+              <div class="section-title">
+                <h2 id="symbolism-title">Символика</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Какие образы можно и нельзя использовать.</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <p class="field-group__title">Хотите использовать конкретный символ?</p>
+            <div class="choice-grid choice-grid--compact">
+              <label class="choice-option">
+                <input name="wantsSymbol" type="radio" value="Да" data-show="symbol-field" />
+                Да
+              </label>
+              <label class="choice-option">
+                <input name="wantsSymbol" type="radio" value="Нет" />
+                Нет
+              </label>
+              <label class="choice-option">
+                <input name="wantsSymbol" type="radio" value="Не знаю" />
+                Не знаю
+              </label>
+            </div>
+            <label class="conditional-field" id="symbol-field" data-depends="wantsSymbol" data-when="Да">
+              Какой символ?
+              <textarea name="desiredSymbol" rows="3" placeholder="Опишите символ или идею"></textarea>
+            </label>
+            <label>
+              Образы или идеи, которые должны быть отражены
+              <textarea name="symbolIdeas" rows="3" placeholder="Технологии, доверие, природа, исламская геометрия, рост…"></textarea>
+            </label>
+            <label>
+              Символы, которые нельзя использовать
+              <textarea name="forbiddenSymbols" rows="3" placeholder="Что категорически исключить"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" id="colors" aria-labelledby="colors-title">
+          <div class="section-heading">
+            <span class="section-number">10</span>
+            <div>
+              <div class="section-title">
+                <h2 id="colors-title">Цвета</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Предпочтительные и запрещённые цвета.</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <p class="field-group__title">Какие цвета вам нравятся?</p>
+            <div class="choice-grid">
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Чёрный" /> Чёрный</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Белый" /> Белый</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Серый" /> Серый</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Синий" /> Синий</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Голубой" /> Голубой</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Зелёный" /> Зелёный</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Изумрудный" /> Изумрудный</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Красный" /> Красный</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Бордовый" /> Бордовый</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Оранжевый" /> Оранжевый</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Жёлтый" /> Жёлтый</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Фиолетовый" /> Фиолетовый</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Розовый" /> Розовый</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Коричневый" /> Коричневый</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Бежевый" /> Бежевый</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Золотой" /> Золотой</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Серебряный" /> Серебряный</label>
+              <label class="choice-option"><input name="likedColors" type="checkbox" value="Другое" data-show="colors-other" /> Другое</label>
+            </div>
+            <label class="conditional-field" id="colors-other" data-depends-checkbox="likedColors" data-when="Другое">
+              Свой цвет
+              <input name="likedColorsOther" type="text" placeholder="Опишите или укажите HEX" />
+            </label>
+            <label>
+              Конкретные цвета бренда (HEX / RGB / Pantone)
+              <input name="brandColors" type="text" placeholder="#1D2939, #B8862F" />
+            </label>
+            <label>
+              Какие цвета использовать нельзя
+              <textarea name="forbiddenColors" rows="3" placeholder="Цвета, которые нужно исключить"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" id="typography" aria-labelledby="typography-title">
+          <div class="section-heading">
+            <span class="section-number">11</span>
+            <div>
+              <div class="section-title">
+                <h2 id="typography-title">Типографика</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Характер шрифта и языки написания.</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <p class="field-group__title">Характер шрифта</p>
+            <div class="choice-grid">
+              <label class="choice-option"><input name="typographyStyle" type="checkbox" value="Минималистичный" /> Минималистичный</label>
+              <label class="choice-option"><input name="typographyStyle" type="checkbox" value="Геометрический" /> Геометрический</label>
+              <label class="choice-option"><input name="typographyStyle" type="checkbox" value="Технологичный" /> Технологичный</label>
+              <label class="choice-option"><input name="typographyStyle" type="checkbox" value="Элегантный" /> Элегантный</label>
+              <label class="choice-option"><input name="typographyStyle" type="checkbox" value="Строгий" /> Строгий</label>
+              <label class="choice-option"><input name="typographyStyle" type="checkbox" value="Мягкий" /> Мягкий</label>
+              <label class="choice-option"><input name="typographyStyle" type="checkbox" value="Классический" /> Классический</label>
+              <label class="choice-option"><input name="typographyStyle" type="checkbox" value="Экспрессивный" /> Экспрессивный</label>
+              <label class="choice-option"><input name="typographyStyle" type="checkbox" value="Рукописный" /> Рукописный</label>
+              <label class="choice-option"><input name="typographyStyle" type="checkbox" value="Не знаю" /> Не знаю</label>
+            </div>
+
+            <p class="field-group__title">Нужна ли арабская версия?</p>
+            <div class="choice-grid choice-grid--compact">
+              <label class="choice-option"><input name="needsArabic" type="radio" value="Да" /> Да</label>
+              <label class="choice-option"><input name="needsArabic" type="radio" value="Нет" /> Нет</label>
+              <label class="choice-option"><input name="needsArabic" type="radio" value="Возможно" /> Возможно</label>
+            </div>
+
+            <p class="field-group__title">Какие языки должны присутствовать?</p>
+            <div class="choice-grid choice-grid--compact">
+              <label class="choice-option"><input name="languages" type="checkbox" value="Русский" /> Русский</label>
+              <label class="choice-option"><input name="languages" type="checkbox" value="Английский" /> Английский</label>
+              <label class="choice-option"><input name="languages" type="checkbox" value="Арабский" /> Арабский</label>
+              <label class="choice-option"><input name="languages" type="checkbox" value="Другой" data-show="languages-other" /> Другой</label>
+            </div>
+            <label class="conditional-field" id="languages-other" data-depends-checkbox="languages" data-when="Другой">
+              Другой язык
+              <input name="languagesOther" type="text" placeholder="Укажите язык" />
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" id="references" aria-labelledby="references-title">
+          <div class="section-heading">
+            <span class="section-number">12</span>
+            <div>
+              <div class="section-title">
+                <h2 id="references-title">Референсы</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Какие логотипы вам нравятся и почему.</p>
+            </div>
+          </div>
+
+          <div class="reference-list" id="references-list" data-kind="reference" data-max="5">
+            <div class="reference-card" data-item>
+              <div class="reference-card__header">
+                <h3 class="reference-card__title">Референс 1</h3>
+              </div>
+              <label>
+                Ссылка или название бренда
+                <input name="referenceUrl1" type="text" placeholder="https://... или Apple, Nike" />
+              </label>
+              <label>
+                Почему нравится
+                <textarea name="referenceWhy1" rows="2" placeholder="Что именно цепляет"></textarea>
+              </label>
+            </div>
+          </div>
+          <button type="button" class="secondary-button add-item-button" data-add="references-list">
+            + Добавить референс
+          </button>
+        </section>
+
+        <section class="form-section" id="anti-references" aria-labelledby="anti-references-title">
+          <div class="section-heading">
+            <span class="section-number">13</span>
+            <div>
+              <div class="section-title">
+                <h2 id="anti-references-title">Антиреференсы</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Какие логотипы вам не нравятся.</p>
+            </div>
+          </div>
+
+          <div class="reference-list" id="anti-references-list" data-kind="anti" data-max="5">
+            <div class="reference-card" data-item>
+              <div class="reference-card__header">
+                <h3 class="reference-card__title">Антиреференс 1</h3>
+              </div>
+              <label>
+                Ссылка, изображение или название
+                <input name="antiReferenceUrl1" type="text" placeholder="Что точно не должно получиться" />
+              </label>
+            </div>
+          </div>
+          <button type="button" class="secondary-button add-item-button" data-add="anti-references-list">
+            + Добавить антиреференс
+          </button>
+
+          <label style="margin-top: 18px">
+            Что именно в них не нравится?
+            <textarea name="antiReferenceWhy" rows="3" placeholder="Стиль, цвета, сложность, ассоциации…"></textarea>
+          </label>
+        </section>
+
+        <section class="form-section" id="competitors" aria-labelledby="competitors-title">
+          <div class="section-heading">
+            <span class="section-number">14</span>
+            <div>
+              <div class="section-title">
+                <h2 id="competitors-title">Конкуренты</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Назовите 3–5 конкурентов и нужно ли от них отличаться.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label><span class="field-label">Конкурент 1</span><input name="competitor1" type="text" placeholder="Название" /></label>
+            <label><span class="field-label">Конкурент 2</span><input name="competitor2" type="text" placeholder="Название" /></label>
+            <label><span class="field-label">Конкурент 3</span><input name="competitor3" type="text" placeholder="Название" /></label>
+            <label><span class="field-label">Конкурент 4</span><input name="competitor4" type="text" placeholder="Название" /></label>
+            <label class="form-grid__wide"><span class="field-label">Конкурент 5</span><input name="competitor5" type="text" placeholder="Название" /></label>
+            <div class="form-grid__wide field-group">
+              <p class="field-group__title">Нужно ли визуально отличаться от конкурентов?</p>
+              <div class="choice-grid choice-grid--compact">
+                <label class="choice-option">
+                  <input name="differentiate" type="radio" value="Да" data-show="differentiate-field" />
+                  Да
+                </label>
+                <label class="choice-option">
+                  <input name="differentiate" type="radio" value="Нет" />
+                  Нет
+                </label>
+                <label class="choice-option">
+                  <input name="differentiate" type="radio" value="Не знаю" />
+                  Не знаю
+                </label>
+              </div>
+              <label class="conditional-field" id="differentiate-field" data-depends="differentiate" data-when="Да">
+                Чем отличаться?
+                <textarea name="differentiateHow" rows="3" placeholder="Цвет, стиль, символика, тон…"></textarea>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" id="features" aria-labelledby="features-title">
+          <div class="section-heading">
+            <span class="section-number">15</span>
+            <div>
+              <div class="section-title">
+                <h2 id="features-title">Особенности бренда</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Что обязательно нужно учитывать.</p>
+            </div>
+          </div>
+
+          <label>
+            Особенности
+            <textarea
+              name="brandFeatures"
+              rows="5"
+              placeholder="Религиозная специфика, культура, премиальный сегмент, страна, юридические ограничения, написание, история названия…"
+            ></textarea>
+          </label>
+        </section>
+
+        <section class="form-section" id="usage" aria-labelledby="usage-title">
+          <div class="section-heading">
+            <span class="section-number">16</span>
+            <div>
+              <div class="section-title">
+                <h2 id="usage-title">Где будет использоваться</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Выберите все нужные поверхности.</p>
+            </div>
+          </div>
+
+          <div class="choice-grid">
+            <label class="choice-option"><input name="usage" type="checkbox" value="Сайт" /> Сайт</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Мобильное приложение" /> Мобильное приложение</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Instagram" /> Instagram</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Telegram" /> Telegram</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="YouTube" /> YouTube</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="TikTok" /> TikTok</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Упаковка" /> Упаковка</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Вывеска" /> Вывеска</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Визитки" /> Визитки</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Документы" /> Документы</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Одежда" /> Одежда</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Мерч" /> Мерч</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Реклама" /> Реклама</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Социальные сети" /> Социальные сети</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Фавикон" /> Фавикон</label>
+            <label class="choice-option"><input name="usage" type="checkbox" value="Другое" data-show="usage-other" /> Другое</label>
+          </div>
+          <label class="conditional-field" id="usage-other" data-depends-checkbox="usage" data-when="Другое" style="margin-top: 12px">
+            Другое применение
+            <input name="usageOther" type="text" placeholder="Где ещё будет логотип" />
+          </label>
+        </section>
+
+        <section class="form-section" id="scalability" aria-labelledby="scalability-title">
+          <div class="section-heading">
+            <span class="section-number">17</span>
+            <div>
+              <div class="section-title">
+                <h2 id="scalability-title">Масштабируемость</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Насколько важна работа в маленьком размере.</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <p class="field-group__title">Важность маленького размера</p>
+            <div class="choice-grid choice-grid--compact">
+              <label class="choice-option"><input name="smallSizeImportance" type="radio" value="Неважно" /> Неважно</label>
+              <label class="choice-option"><input name="smallSizeImportance" type="radio" value="Важно" /> Важно</label>
+              <label class="choice-option"><input name="smallSizeImportance" type="radio" value="Очень важно" /> Очень важно</label>
+            </div>
+
+            <p class="field-group__title">Нужна ли отдельная иконка / знак?</p>
+            <div class="choice-grid choice-grid--compact">
+              <label class="choice-option"><input name="needsIcon" type="radio" value="Да" /> Да</label>
+              <label class="choice-option"><input name="needsIcon" type="radio" value="Нет" /> Нет</label>
+              <label class="choice-option"><input name="needsIcon" type="radio" value="Не знаю" /> Не знаю</label>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" id="architecture" aria-labelledby="architecture-title">
+          <div class="section-heading">
+            <span class="section-number">18</span>
+            <div>
+              <div class="section-title">
+                <h2 id="architecture-title">Бренд-архитектура</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Есть ли дочерние продукты и планы развития.</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <p class="field-group__title">Есть ли дочерние продукты / направления?</p>
+            <div class="choice-grid choice-grid--compact">
+              <label class="choice-option">
+                <input name="hasSubbrands" type="radio" value="Да" data-show="subbrands-field" />
+                Да
+              </label>
+              <label class="choice-option">
+                <input name="hasSubbrands" type="radio" value="Нет" />
+                Нет
+              </label>
+            </div>
+            <label class="conditional-field" id="subbrands-field" data-depends="hasSubbrands" data-when="Да">
+              Какие направления?
+              <textarea name="subbrands" rows="3" placeholder="Перечислите продукты или направления"></textarea>
+            </label>
+
+            <p class="field-group__title">Планируется ли развитие бренда?</p>
+            <div class="choice-grid">
+              <label class="choice-option"><input name="brandGrowth" type="radio" value="Один продукт" /> Один продукт</label>
+              <label class="choice-option"><input name="brandGrowth" type="radio" value="Несколько продуктов" /> Несколько продуктов</label>
+              <label class="choice-option"><input name="brandGrowth" type="radio" value="Линейка продуктов" /> Линейка продуктов</label>
+              <label class="choice-option"><input name="brandGrowth" type="radio" value="Экосистема" /> Экосистема</label>
+              <label class="choice-option"><input name="brandGrowth" type="radio" value="Не знаю" /> Не знаю</label>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" id="constraints" aria-labelledby="constraints-title">
+          <div class="section-heading">
+            <span class="section-number">19</span>
+            <div>
+              <div class="section-title">
+                <h2 id="constraints-title">Ограничения</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Что дизайнеру категорически нельзя делать.</p>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>
+              Запреты для дизайнера
+              <textarea name="designerRestrictions" rows="4" placeholder="Что нельзя делать в логотипе"></textarea>
+            </label>
+            <p class="field-group__title">Есть ли юридические / культурные / религиозные ограничения?</p>
+            <div class="choice-grid choice-grid--compact">
+              <label class="choice-option">
+                <input name="hasLegalConstraints" type="radio" value="Да" data-show="legal-constraints-field" />
+                Да
+              </label>
+              <label class="choice-option">
+                <input name="hasLegalConstraints" type="radio" value="Нет" />
+                Нет
+              </label>
+            </div>
+            <label class="conditional-field" id="legal-constraints-field" data-depends="hasLegalConstraints" data-when="Да">
+              Опишите ограничения
+              <textarea name="legalConstraints" rows="3" placeholder="Юридические, культурные или религиозные требования"></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" id="impression" aria-labelledby="impression-title">
+          <div class="section-heading">
+            <span class="section-number">20</span>
+            <div>
+              <div class="section-title">
+                <h2 id="impression-title">Личное впечатление</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Какое ощущение должен давать готовый логотип.</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <label class="form-grid__wide">
+              Что вы хотите почувствовать, когда увидите готовый логотип?
+              <textarea name="desiredFeeling" rows="3" placeholder="Уверенность, спокойствие, драйв…"></textarea>
+            </label>
+            <label class="form-grid__wide">
+              «Мой идеальный логотип — это…»
+              <input name="idealLogoSentence" type="text" placeholder="Одним предложением" />
+            </label>
+          </div>
+        </section>
+
+        <section class="form-section" id="priorities" aria-labelledby="priorities-title">
+          <div class="section-heading">
+            <span class="section-number">21</span>
+            <div>
+              <div class="section-title">
+                <h2 id="priorities-title">Приоритеты</h2>
+                <span class="section-meta">До 3</span>
+              </div>
+              <p>Выберите 3 главных критерия.</p>
+            </div>
+          </div>
+
+          <div class="choice-grid" data-max-checks="3" data-max-label="приоритеты">
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Уникальность" /> Уникальность</label>
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Минимализм" /> Минимализм</label>
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Узнаваемость" /> Узнаваемость</label>
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Премиальность" /> Премиальность</label>
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Современность" /> Современность</label>
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Технологичность" /> Технологичность</label>
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Доверие" /> Доверие</label>
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Эмоциональность" /> Эмоциональность</label>
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Простота" /> Простота</label>
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Универсальность" /> Универсальность</label>
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Культурная идентичность" /> Культурная идентичность</label>
+            <label class="choice-option"><input name="priorities" type="checkbox" value="Другое" data-show="priorities-other" /> Другое</label>
+          </div>
+          <label class="conditional-field" id="priorities-other" data-depends-checkbox="priorities" data-when="Другое" style="margin-top: 12px">
+            Свой приоритет
+            <input name="prioritiesOther" type="text" placeholder="Укажите критерий" />
+          </label>
+        </section>
+
+        <section class="form-section" id="extra" aria-labelledby="extra-title">
+          <div class="section-heading">
+            <span class="section-number">22</span>
+            <div>
+              <div class="section-title">
+                <h2 id="extra-title">Дополнительная информация</h2>
+                <span class="section-meta">Необязательно</span>
+              </div>
+              <p>Есть ли что-то ещё, что дизайнер должен знать?</p>
+            </div>
+          </div>
+
+          <label>
+            Комментарий
+            <textarea name="extraInfo" rows="5" placeholder="Любые детали, которые важно учесть"></textarea>
+          </label>
+
+          <div class="form-grid" style="margin-top: 18px">
+            <label>
+              <span class="field-label">Контактное лицо</span>
+              <input name="contactName" type="text" placeholder="Ваше имя" />
+            </label>
+            <label>
+              <span class="field-label">Telegram / телефон / email</span>
+              <input name="contactInfo" type="text" placeholder="@username, +7… или email" />
+            </label>
+          </div>
+        </section>
+
+        <div class="form-actions">
+          <div>
+            <p>Обязательно только название бренда. Остальное можно заполнить частично.</p>
+            <p class="form-status" id="form-status" role="status"></p>
+          </div>
+          <button type="submit" id="submit-button">Собрать бриф и отправить</button>
+        </div>
+      </form>
+
+      <section class="result-screen" id="result-screen" aria-labelledby="result-title" hidden>
+        <article class="result-card">
+          <div class="hero__badge">Готово</div>
+          <h2 id="result-title">Ваш бриф готов</h2>
+          <p>
+            Мы собрали ваши ответы и превратили их в структурированное ТЗ и AI-промпт для разработки
+            логотипа. Копия также отправлена в Telegram.
+          </p>
+          <p class="form-status" id="result-status" role="status"></p>
+
+          <div class="result-actions">
+            <button type="button" id="copy-prompt">Скопировать промпт</button>
+            <button type="button" class="secondary-button" id="download-brief">Скачать бриф</button>
+            <button type="button" class="ghost-button" id="edit-brief">Изменить ответы</button>
+            <button type="button" class="ghost-button" id="new-brief">Создать новый бриф</button>
+          </div>
+
+          <div class="summary-block" id="summary-block"></div>
+
+          <h3 style="margin: 0 0 12px; font-size: 18px">Финальный AI Prompt</h3>
+          <pre class="prompt-box" id="prompt-box"></pre>
+          <p class="prompt-tools">
+            Готовый промпт можно использовать в ChatGPT, Midjourney, Gemini, Claude, передать дизайнеру
+            или студии.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <div class="copy-toast" id="copy-toast" role="status">Промпт скопирован</div>
+    <script src="script.js"></script>
+  </body>
+</html>

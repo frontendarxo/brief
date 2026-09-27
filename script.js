@@ -89,7 +89,9 @@ const closeNavOnOutsideClick = (event) => {
 const getLabelText = (field) => {
   const label = field.closest("label");
   const labelCopy = label.cloneNode(true);
-  const ignoredElements = labelCopy.querySelectorAll("input, select, textarea, .required-badge");
+  const ignoredElements = labelCopy.querySelectorAll(
+    "input, select, textarea, .required-badge, .term-tip, .term-tip__popup",
+  );
 
   ignoredElements.forEach((element) => element.remove());
   return labelCopy.textContent.trim().replace(/\s+/g, " ");
@@ -163,10 +165,48 @@ const handleSuccessMessageClick = (event) => {
   }
 };
 
-const handleEscapePress = (event) => {
-  if (event.key === ESCAPE_KEY && !successMessage.hidden) {
-    showBriefForm();
+const closeAllTermTips = () => {
+  document.querySelectorAll(".term.is-open").forEach((term) => {
+    term.classList.remove("is-open");
+    term.querySelector(".term-tip")?.setAttribute("aria-expanded", "false");
+  });
+};
+
+const handleTermTipClick = (event) => {
+  const tipButton = event.target.closest(".term-tip");
+
+  if (!tipButton) {
+    return;
   }
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  const term = tipButton.closest(".term");
+  const willOpen = !term.classList.contains("is-open");
+
+  closeAllTermTips();
+  term.classList.toggle("is-open", willOpen);
+  tipButton.setAttribute("aria-expanded", String(willOpen));
+};
+
+const closeTermTipsOnOutsideClick = (event) => {
+  if (!event.target.closest(".term")) {
+    closeAllTermTips();
+  }
+};
+
+const handleEscapePress = (event) => {
+  if (event.key !== ESCAPE_KEY) {
+    return;
+  }
+
+  if (!successMessage.hidden) {
+    showBriefForm();
+    return;
+  }
+
+  closeAllTermTips();
 };
 
 briefForm.addEventListener("submit", async (event) => {
@@ -187,6 +227,8 @@ briefForm.addEventListener("submit", async (event) => {
 editBriefButton.addEventListener("click", showBriefForm);
 successMessage.addEventListener("click", handleSuccessMessageClick);
 briefNav.addEventListener("click", handleNavClick);
+document.addEventListener("click", handleTermTipClick);
+document.addEventListener("click", closeTermTipsOnOutsideClick);
 document.addEventListener("click", closeNavOnOutsideClick);
 document.addEventListener("keydown", handleEscapePress);
 window.addEventListener("scroll", updateNavVisibility, { passive: true });

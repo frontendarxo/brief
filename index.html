@@ -16,7 +16,18 @@
     <main class="page">
       <section class="hero" aria-labelledby="page-title">
         <div class="hero__badge">Проектный бриф</div>
-        <h1 id="page-title">White-label калькулятор рассрочки</h1>
+        <h1 id="page-title">
+          <span class="term">
+            White-label
+            <button type="button" class="term-tip" aria-label="Что такое White-label" aria-expanded="false">
+              <span aria-hidden="true">?</span>
+            </button>
+            <span class="term-tip__popup" role="tooltip">
+              Готовый продукт под вашим брендом: своё название, логотип и цвета вместо чужих.
+            </span>
+          </span>
+          калькулятор рассрочки
+        </h1>
         <p>
           Ответьте на вопросы, чтобы мы быстро поняли задачу, сохранили нужные настройки
           и подготовили калькулятор под ваш бренд.
@@ -24,6 +35,9 @@
         <p class="hero__hint">
           Обязательны только 3 поля в первом разделе. Остальное можно пропустить или написать
           «оставить по умолчанию».
+        </p>
+        <p>
+          <a href="/logo/">Открыть бриф на логотип →</a>
         </p>
       </section>
 
@@ -70,11 +84,31 @@
               <input name="contactInfo" type="text" placeholder="@instagram, +7 999 000-00-00, Telegram или email" required />
             </label>
             <label>
-              Короткий слоган
+              <span class="field-label">
+                <span class="term">
+                  Короткий слоган
+                  <button type="button" class="term-tip" aria-label="Что такое слоган" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Короткая фраза рядом с брендом, которая передаёт суть сервиса.
+                  </span>
+                </span>
+              </span>
               <input name="tagline" type="text" placeholder="Короткая фраза под логотипом" />
             </label>
             <label>
-              Логотип
+              <span class="field-label">
+                <span class="term">
+                  Логотип
+                  <button type="button" class="term-tip" aria-label="Что такое логотип" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Фирменный знак или название компании в шапке сайта и в документах.
+                  </span>
+                </span>
+              </span>
               <select name="logoSource">
                 <option value="">Выберите вариант</option>
                 <option>Прикрепим файл отдельно</option>
@@ -85,7 +119,17 @@
               </select>
             </label>
             <label>
-              Favicon
+              <span class="field-label">
+                <span class="term">
+                  Favicon
+                  <button type="button" class="term-tip" aria-label="Что такое Favicon" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Маленькая иконка сайта на вкладке браузера и в закладках.
+                  </span>
+                </span>
+              </span>
               <select name="faviconSource">
                 <option value="">Выберите вариант</option>
                 <option>Сделать из логотипа</option>
@@ -96,11 +140,33 @@
               </select>
             </label>
             <label class="form-grid__wide">
-              Комментарий по логотипу и favicon
+              <span class="field-label">
+                Комментарий по логотипу и
+                <span class="term">
+                  favicon
+                  <button type="button" class="term-tip" aria-label="Что такое favicon" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Маленькая иконка сайта на вкладке браузера и в закладках.
+                  </span>
+                </span>
+              </span>
               <textarea name="brandAssetsComment" rows="3" placeholder="Например: логотип отправим в Telegram, favicon сделайте из логотипа"></textarea>
             </label>
             <label class="form-grid__wide">
-              Как подписывать бренд в PDF
+              <span class="field-label">
+                Как подписывать бренд в
+                <span class="term">
+                  PDF
+                  <button type="button" class="term-tip" aria-label="Что такое PDF" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Документ с расчётом рассрочки, который можно скачать и отправить клиенту.
+                  </span>
+                </span>
+              </span>
               <input name="pdfBrandName" type="text" placeholder="Название для PDF-документа" />
             </label>
           </div>
@@ -111,7 +177,18 @@
             <span class="section-number">02</span>
             <div>
               <div class="section-title">
-                <h2 id="reference-title">Референс сайта</h2>
+                <h2 id="reference-title">
+                  <span class="term">
+                    Референс
+                    <button type="button" class="term-tip" aria-label="Что такое референс" aria-expanded="false">
+                      <span aria-hidden="true">?</span>
+                    </button>
+                    <span class="term-tip__popup" role="tooltip">
+                      Пример сайта или дизайна, на который ориентируемся при сборке.
+                    </span>
+                  </span>
+                  сайта
+                </h2>
                 <span class="section-meta">Необязательно</span>
               </div>
               <p>Покажите сайты, которые вам нравятся.</p>
@@ -152,11 +229,33 @@
 
           <div class="form-grid">
             <label>
-              Основной акцентный цвет
+              <span class="field-label">
+                Основной
+                <span class="term">
+                  акцентный цвет
+                  <button type="button" class="term-tip" aria-label="Что такое акцентный цвет" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Главный фирменный цвет кнопок, ссылок и важных элементов интерфейса.
+                  </span>
+                </span>
+              </span>
               <input name="primaryColor" type="text" placeholder="#C9A24A — золотой" />
             </label>
             <label>
-              Светлый акцентный цвет
+              <span class="field-label">
+                Светлый
+                <span class="term">
+                  акцентный цвет
+                  <button type="button" class="term-tip" aria-label="Что такое светлый акцентный цвет" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Более мягкий оттенок акцента для подложек, бейджей и второстепенных элементов.
+                  </span>
+                </span>
+              </span>
               <input name="lightAccentColor" type="text" placeholder="#F5E8C8 — светло-золотой" />
             </label>
             <label>
@@ -204,7 +303,18 @@
               <textarea name="installmentPoints" rows="4" placeholder="Каждый пункт с новой строки"></textarea>
             </label>
             <label class="form-grid__wide">
-              Дисклеймер под результатом расчёта
+              <span class="field-label">
+                <span class="term">
+                  Дисклеймер
+                  <button type="button" class="term-tip" aria-label="Что такое дисклеймер" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Короткое юридическое или поясняющее предупреждение под результатом расчёта.
+                  </span>
+                </span>
+                под результатом расчёта
+              </span>
               <textarea name="resultDisclaimer" rows="3" placeholder="Юридическая или поясняющая информация"></textarea>
             </label>
           </div>
@@ -240,11 +350,34 @@
               <input name="maxAmount" type="text" placeholder="Например, 1 000 000 ₽" />
             </label>
             <label>
-              Максимальный первоначальный взнос
+              <span class="field-label">
+                Максимальный
+                <span class="term">
+                  первоначальный взнос
+                  <button type="button" class="term-tip" aria-label="Что такое первоначальный взнос" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Сумма, которую клиент платит сразу при оформлении рассрочки.
+                  </span>
+                </span>
+              </span>
               <input name="maxInitialPayment" type="text" placeholder="Например, до стоимости товара" />
             </label>
             <label>
-              Можно ли менять наценку вручную
+              <span class="field-label">
+                Можно ли менять
+                <span class="term">
+                  наценку
+                  <button type="button" class="term-tip" aria-label="Что такое наценка" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Доплата к стоимости товара за выбранный срок рассрочки.
+                  </span>
+                </span>
+                вручную
+              </span>
               <select name="manualMarkup">
                 <option value="">Выберите вариант</option>
                 <option>Да</option>
@@ -260,7 +393,18 @@
             <span class="section-number">06</span>
             <div>
               <div class="section-title">
-                <h2 id="markup-title">Наценки по срокам</h2>
+                <h2 id="markup-title">
+                  <span class="term">
+                    Наценки
+                    <button type="button" class="term-tip" aria-label="Что такое наценки" aria-expanded="false">
+                      <span aria-hidden="true">?</span>
+                    </button>
+                    <span class="term-tip__popup" role="tooltip">
+                      Доплата к стоимости товара за выбранный срок рассрочки.
+                    </span>
+                  </span>
+                  по срокам
+                </h2>
                 <span class="section-meta">Необязательно</span>
               </div>
               <p>Заполните только сроки, где нужна своя наценка.</p>
@@ -268,7 +412,18 @@
           </div>
 
           <label>
-            Таблица наценок
+            <span class="field-label">
+              Таблица
+              <span class="term">
+                наценок
+                <button type="button" class="term-tip" aria-label="Что такое таблица наценок" aria-expanded="false">
+                  <span aria-hidden="true">?</span>
+                </button>
+                <span class="term-tip__popup" role="tooltip">
+                  Список сроков и процента или суммы доплаты за каждый срок рассрочки.
+                </span>
+              </span>
+            </span>
             <textarea
               name="markupTable"
               rows="8"
@@ -295,7 +450,18 @@
               <input name="defaultAmount" type="text" placeholder="100 000 ₽" />
             </label>
             <label>
-              Первоначальный взнос по умолчанию
+              <span class="field-label">
+                <span class="term">
+                  Первоначальный взнос
+                  <button type="button" class="term-tip" aria-label="Что такое первоначальный взнос" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Сумма, которую клиент платит сразу при оформлении рассрочки.
+                  </span>
+                </span>
+                по умолчанию
+              </span>
               <input name="defaultInitialPayment" type="text" placeholder="25 000 ₽" />
             </label>
             <label>
@@ -322,9 +488,33 @@
           </div>
 
           <div class="checkbox-grid">
-            <label><input name="disabledFeatures" type="checkbox" value="График платежей" /> Отключить график платежей</label>
+            <label>
+              <input name="disabledFeatures" type="checkbox" value="График платежей" />
+              Отключить
+              <span class="term">
+                график платежей
+                <button type="button" class="term-tip" aria-label="Что такое график платежей" aria-expanded="false">
+                  <span aria-hidden="true">?</span>
+                </button>
+                <span class="term-tip__popup" role="tooltip">
+                  Таблица: сколько и когда клиент платит по месяцам.
+                </span>
+              </span>
+            </label>
             <label><input name="disabledFeatures" type="checkbox" value="WhatsApp" /> Отключить WhatsApp</label>
-            <label><input name="disabledFeatures" type="checkbox" value="PDF" /> Отключить PDF</label>
+            <label>
+              <input name="disabledFeatures" type="checkbox" value="PDF" />
+              Отключить
+              <span class="term">
+                PDF
+                <button type="button" class="term-tip" aria-label="Что такое PDF" aria-expanded="false">
+                  <span aria-hidden="true">?</span>
+                </button>
+                <span class="term-tip__popup" role="tooltip">
+                  Документ с расчётом рассрочки, который можно скачать и отправить клиенту.
+                </span>
+              </span>
+            </label>
             <label><input name="disabledFeatures" type="checkbox" value="История" /> Отключить историю</label>
             <label><input name="disabledFeatures" type="checkbox" value="Примеры" /> Отключить примеры</label>
           </div>
@@ -360,7 +550,19 @@
               <textarea name="whatsappRemoveFields" rows="3" placeholder="Напишите, что не должно попадать в сообщение"></textarea>
             </label>
             <label class="form-grid__wide">
-              Нужно ли добавлять график платежей в сообщение
+              <span class="field-label">
+                Нужно ли добавлять
+                <span class="term">
+                  график платежей
+                  <button type="button" class="term-tip" aria-label="Что такое график платежей" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Таблица: сколько и когда клиент платит по месяцам.
+                  </span>
+                </span>
+                в сообщение
+              </span>
               <select name="whatsappSchedule">
                 <option value="">Выберите вариант</option>
                 <option>Да</option>
@@ -408,7 +610,18 @@
             <span class="section-number">11</span>
             <div>
               <div class="section-title">
-                <h2 id="pdf-title">PDF документ</h2>
+                <h2 id="pdf-title">
+                  <span class="term">
+                    PDF
+                    <button type="button" class="term-tip" aria-label="Что такое PDF" aria-expanded="false">
+                      <span aria-hidden="true">?</span>
+                    </button>
+                    <span class="term-tip__popup" role="tooltip">
+                      Документ с расчётом рассрочки, который можно скачать и отправить клиенту.
+                    </span>
+                  </span>
+                  документ
+                </h2>
                 <span class="section-meta">Необязательно</span>
               </div>
               <p>Укажите, что должно быть в PDF.</p>
@@ -425,7 +638,18 @@
               <input name="pdfSubtitle" type="text" placeholder="Краткое пояснение документа" />
             </label>
             <label>
-              Нужно ли показывать график платежей
+              <span class="field-label">
+                Нужно ли показывать
+                <span class="term">
+                  график платежей
+                  <button type="button" class="term-tip" aria-label="Что такое график платежей" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Таблица: сколько и когда клиент платит по месяцам.
+                  </span>
+                </span>
+              </span>
               <select name="pdfSchedule">
                 <option value="">Выберите вариант</option>
                 <option>Да</option>
@@ -438,7 +662,18 @@
               <input name="pdfFileName" type="text" placeholder="installment-calculation.pdf" />
             </label>
             <label class="form-grid__wide">
-              Текст дисклеймера
+              <span class="field-label">
+                Текст
+                <span class="term">
+                  дисклеймера
+                  <button type="button" class="term-tip" aria-label="Что такое дисклеймер" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Короткое юридическое или поясняющее предупреждение в конце PDF.
+                  </span>
+                </span>
+              </span>
               <textarea name="pdfDisclaimer" rows="3" placeholder="Текст в конце PDF"></textarea>
             </label>
           </div>
@@ -478,7 +713,18 @@
               <input name="legalName" type="text" placeholder="ООО / ИП / ТОО" />
             </label>
             <label class="form-grid__wide">
-              Дополнительный дисклеймер
+              <span class="field-label">
+                Дополнительный
+                <span class="term">
+                  дисклеймер
+                  <button type="button" class="term-tip" aria-label="Что такое дисклеймер" aria-expanded="false">
+                    <span aria-hidden="true">?</span>
+                  </button>
+                  <span class="term-tip__popup" role="tooltip">
+                    Юридическое или поясняющее предупреждение в контактах и реквизитах.
+                  </span>
+                </span>
+              </span>
               <textarea name="legalDisclaimer" rows="3" placeholder="Юридические примечания или условия"></textarea>
             </label>
           </div>

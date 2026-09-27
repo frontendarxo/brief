@@ -97,6 +97,16 @@ button {
   font-size: clamp(17px, 2vw, 20px);
 }
 
+.hero a {
+  color: var(--accent-dark);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero a:hover {
+  text-decoration: underline;
+}
+
 .hero__hint {
   width: fit-content;
   margin-top: 22px;
@@ -337,6 +347,106 @@ label {
   gap: 8px;
 }
 
+.term {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.term-tip {
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(184, 134, 47, 0.35);
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0;
+  box-shadow: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.term-tip:hover,
+.term-tip:focus-visible,
+.term.is-open .term-tip {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+  transform: none;
+  box-shadow: none;
+}
+
+.term-tip:focus-visible {
+  outline: 2px solid rgba(184, 134, 47, 0.35);
+  outline-offset: 2px;
+}
+
+.term-tip__popup {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 12;
+  width: min(280px, calc(100vw - 40px));
+  padding: 12px 14px;
+  border: 1px solid rgba(184, 134, 47, 0.22);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  box-shadow: 0 16px 40px rgba(64, 48, 24, 0.14);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.term.is-open .term-tip__popup {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.section-title .term-tip__popup,
+.hero h1 .term-tip__popup {
+  left: 50%;
+  transform: translate(-50%, -4px);
+}
+
+.section-title .term.is-open .term-tip__popup,
+.hero h1 .term.is-open .term-tip__popup {
+  transform: translate(-50%, 0);
+}
+
+@media (hover: hover) {
+  .term:hover .term-tip__popup,
+  .term:focus-within .term-tip__popup {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .section-title .term:hover .term-tip__popup,
+  .section-title .term:focus-within .term-tip__popup,
+  .hero h1 .term:hover .term-tip__popup,
+  .hero h1 .term:focus-within .term-tip__popup {
+    transform: translate(-50%, 0);
+  }
+}
+
 input,
 select,
 textarea {
@@ -400,6 +510,7 @@ textarea:focus {
 
 .checkbox-grid label {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   min-height: 54px;
